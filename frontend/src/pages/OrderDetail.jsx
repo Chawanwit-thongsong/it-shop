@@ -39,7 +39,7 @@ function OrderDetail() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
-      <Link to="/orders" className="text-sm text-slate-500 hover:text-indigo-600">← ออเดอร์ของฉัน</Link>
+      <Link to="/orders" className="text-sm text-muted hover:text-accent">กลับไปออเดอร์ของฉัน</Link>
       {location.state?.justOrdered && (
         <p className="mt-4 rounded-lg bg-emerald-50 p-3 text-sm text-emerald-700">สั่งซื้อสำเร็จ ขอบคุณที่ใช้บริการ</p>
       )}

@@ -21,19 +21,19 @@ function MyOrders() {
           <ErrorBox error={orders.error} onRetry={orders.reload} />
         ) : orders.data.length === 0 ? (
           <Empty title="ยังไม่มีออเดอร์">
-            <Link to="/products" className="text-indigo-600 hover:underline">ไปเลือกสินค้า</Link>
+            <Link to="/products" className="text-accent hover:underline">ไปเลือกสินค้า</Link>
           </Empty>
         ) : (
           <ul className="space-y-3">
             {orders.data.map((o) => (
               <li key={o.id}>
                 <Link to={`/orders/${o.id}`}
-                      className="flex flex-wrap items-center gap-4 rounded-xl border border-slate-200 bg-white p-4 hover:border-indigo-300">
+                      className="flex flex-wrap items-center gap-4 rounded-plate border border-line bg-white p-4 hover:border-accent">
                   <span className="font-medium">#{o.id}</span>
-                  <span className="text-sm text-slate-500">{dateTime(o.createdAt)}</span>
-                  <span className="text-sm text-slate-500">{o.itemCount} ชิ้น</span>
+                  <span className="text-sm text-muted">{dateTime(o.createdAt)}</span>
+                  <span className="text-sm text-muted">{o.itemCount} ชิ้น</span>
                   <StatusBadge status={o.status} />
-                  <span className="ml-auto font-semibold text-indigo-700">{baht(o.total)}</span>
+                  <span className="ml-auto font-semibold text-accent-dark">{baht(o.total)}</span>
                 </Link>
               </li>
             ))}

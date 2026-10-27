@@ -15,7 +15,7 @@ function AdminOrderDetail() {
   if (order.error) return <ErrorBox error={order.error} onRetry={order.reload} />;
   return (
     <div>
-      <Link to="/admin/orders" className="text-sm text-slate-500 hover:text-indigo-600">← ออเดอร์ทั้งหมด</Link>
+      <Link to="/admin/orders" className="text-sm text-muted hover:text-accent">กลับไปออเดอร์ทั้งหมด</Link>
       <div className="mt-4"><OrderView order={order.data} showMember /></div>
     </div>
   );

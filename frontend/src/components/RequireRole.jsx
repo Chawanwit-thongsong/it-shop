@@ -13,8 +13,8 @@ function RequireRole({ role, children }) {
     return (
       <div className="px-4 py-24 text-center">
         <p className="text-5xl font-semibold text-slate-300">403</p>
-        <p className="mt-2 text-slate-500">หน้านี้สำหรับ {role} เท่านั้น</p>
-        <Link to="/" className="mt-4 inline-block text-sm text-indigo-600 hover:underline">กลับหน้าแรก</Link>
+        <p className="mt-2 text-muted">หน้านี้สำหรับ {role} เท่านั้น</p>
+        <Link to="/" className="mt-4 inline-block text-sm text-accent hover:underline">กลับหน้าแรก</Link>
       </div>
     );
   }

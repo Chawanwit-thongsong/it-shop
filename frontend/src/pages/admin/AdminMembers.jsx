@@ -38,9 +38,9 @@ function AdminMembers() {
         ) : list.data.length === 0 ? (
           <Empty title="ยังไม่มีสมาชิก" />
         ) : (
-          <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <div className="overflow-x-auto rounded-plate border border-line bg-white">
             <table className="w-full text-left text-sm">
-              <thead className="bg-slate-50 text-slate-500">
+              <thead className="bg-plate text-muted">
                 <tr>
                   <th className="p-3">ชื่อ</th>
                   <th className="p-3">อีเมล</th>
@@ -53,12 +53,12 @@ function AdminMembers() {
                 {list.data.map((m) => {
                   const nextRole = m.role === 'admin' ? 'member' : 'admin';
                   return (
-                    <tr key={m.id} className="border-t border-slate-100">
+                    <tr key={m.id} className="border-t border-line">
                       <td className="p-3 font-medium">{m.displayName}</td>
-                      <td className="p-3 text-slate-500">{m.email}</td>
-                      <td className="p-3 text-slate-500">{dateTime(m.createdAt)}</td>
+                      <td className="p-3 text-muted">{m.email}</td>
+                      <td className="p-3 text-muted">{dateTime(m.createdAt)}</td>
                       <td className="p-3">
-                        <span className={`rounded px-2 py-0.5 text-xs ${m.role === 'admin' ? 'bg-indigo-50 text-indigo-700' : 'bg-slate-100 text-slate-600'}`}>
+                        <span className={`rounded px-2 py-0.5 text-xs ${m.role === 'admin' ? 'bg-accent-soft text-accent-dark' : 'bg-slate-100 text-muted'}`}>
                           {m.role}
                         </span>
                       </td>

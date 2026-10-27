@@ -8,28 +8,28 @@ function OrderView({ order, showMember = false }) {
       <div className="flex flex-wrap items-center gap-3">
         <h1 className="text-2xl font-semibold">ออเดอร์ #{order.id}</h1>
         <StatusBadge status={order.status} />
-        <span className="text-sm text-slate-500">{dateTime(order.createdAt)}</span>
+        <span className="text-sm text-muted">{dateTime(order.createdAt)}</span>
       </div>
 
-      <div className="rounded-xl border border-slate-200 bg-white p-5 text-sm">
+      <div className="rounded-plate border border-line bg-white p-5 text-sm">
         <h2 className="mb-2 font-semibold">จัดส่งถึง</h2>
-        {showMember && <p className="text-slate-500">สมาชิก: {order.memberName} ({order.memberEmail})</p>}
-        <p>{order.shipName} · {order.shipPhone}</p>
-        <p className="whitespace-pre-line text-slate-600">{order.shipAddress}</p>
+        {showMember && <p className="text-muted">สมาชิก: {order.memberName} ({order.memberEmail})</p>}
+        <p>{order.shipName}, โทร {order.shipPhone}</p>
+        <p className="whitespace-pre-line text-muted">{order.shipAddress}</p>
       </div>
 
-      <ul className="divide-y divide-slate-100 rounded-xl border border-slate-200 bg-white">
+      <ul className="divide-y divide-line rounded-plate border border-line bg-white">
         {order.items.map((it) => (
           <li key={it.productId} className="flex items-center gap-4 p-4">
             {it.imageUrl && <img src={it.imageUrl} alt="" className="h-12 w-12 rounded object-contain" />}
             <span className="flex-1">{it.name}</span>
-            <span className="text-sm text-slate-500">{baht(it.unitPrice)} × {it.qty}</span>
+            <span className="text-sm text-muted">{baht(it.unitPrice)} × {it.qty}</span>
             <span className="w-24 text-right font-medium">{baht(it.unitPrice * it.qty)}</span>
           </li>
         ))}
         <li className="flex justify-between p-4 font-semibold">
           <span>ยอดรวม</span>
-          <span className="text-indigo-700">{baht(order.total)}</span>
+          <span className="text-accent-dark">{baht(order.total)}</span>
         </li>
       </ul>
     </div>

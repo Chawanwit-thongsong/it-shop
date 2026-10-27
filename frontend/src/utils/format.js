@@ -11,7 +11,7 @@ export function dateTime(iso) {
 export const ORDER_STATUS = {
   pending: { label: 'รอชำระเงิน', className: 'bg-amber-50 text-amber-700' },
   paid: { label: 'ชำระแล้ว', className: 'bg-sky-50 text-sky-700' },
-  shipped: { label: 'กำลังจัดส่ง', className: 'bg-indigo-50 text-indigo-700' },
+  shipped: { label: 'กำลังจัดส่ง', className: 'bg-accent-soft text-accent-dark' },
   done: { label: 'สำเร็จ', className: 'bg-emerald-50 text-emerald-700' },
   cancelled: { label: 'ยกเลิก', className: 'bg-slate-100 text-slate-500' },
 };

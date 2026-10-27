@@ -64,41 +64,41 @@ function AdminProductForm() {
   return (
     <div className="max-w-2xl">
       <h1 className="text-2xl font-semibold">{isEdit ? 'แก้ไขสินค้า' : 'เพิ่มสินค้า'}</h1>
-      <form onSubmit={handleSubmit} noValidate className="mt-6 grid gap-4 rounded-xl border border-slate-200 bg-white p-6 md:grid-cols-2">
+      <form onSubmit={handleSubmit} noValidate className="mt-6 grid gap-4 rounded-plate border border-line bg-white p-6 md:grid-cols-2">
         <label className="block md:col-span-2">
-          <span className="text-sm text-slate-600">ชื่อสินค้า *</span>
+          <span className="text-sm text-muted">ชื่อสินค้า *</span>
           <input value={form.name} onChange={set('name')} className={`${inputClass} mt-1`} />
         </label>
         <label className="block">
-          <span className="text-sm text-slate-600">หมวด *</span>
+          <span className="text-sm text-muted">หมวด *</span>
           <select value={form.categoryId} onChange={set('categoryId')} className={`${inputClass} mt-1`}>
             <option value="">เลือกหมวด</option>
             {cats.data.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
           </select>
         </label>
         <label className="block">
-          <span className="text-sm text-slate-600">แบรนด์</span>
+          <span className="text-sm text-muted">แบรนด์</span>
           <input value={form.brand} onChange={set('brand')} className={`${inputClass} mt-1`} />
         </label>
         <label className="block">
-          <span className="text-sm text-slate-600">ราคา (บาท) *</span>
+          <span className="text-sm text-muted">ราคา (บาท) *</span>
           <input type="number" min="0" value={form.price} onChange={set('price')} className={`${inputClass} mt-1`} />
         </label>
         <label className="block">
-          <span className="text-sm text-slate-600">สต็อก *</span>
+          <span className="text-sm text-muted">สต็อก *</span>
           <input type="number" min="0" value={form.stock} onChange={set('stock')} className={`${inputClass} mt-1`} />
         </label>
         <label className="block md:col-span-2">
-          <span className="text-sm text-slate-600">ลิงก์รูป (https://...)</span>
+          <span className="text-sm text-muted">ลิงก์รูป (https://...)</span>
           <input value={form.imageUrl} onChange={set('imageUrl')} className={`${inputClass} mt-1`} />
         </label>
         <label className="block md:col-span-2">
-          <span className="text-sm text-slate-600">รายละเอียด</span>
+          <span className="text-sm text-muted">รายละเอียด</span>
           <textarea rows={4} value={form.description} onChange={set('description')} className={`${inputClass} mt-1`} />
         </label>
         <label className="flex items-center gap-2 md:col-span-2">
           <input type="checkbox" checked={form.isActive} onChange={set('isActive')} />
-          <span className="text-sm text-slate-600">เปิดขาย (แสดงในหน้าร้าน)</span>
+          <span className="text-sm text-muted">เปิดขาย (แสดงในหน้าร้าน)</span>
         </label>
         {error && <p role="alert" className="text-sm text-red-600 md:col-span-2">{error}</p>}
         <div className="flex gap-2 md:col-span-2">

@@ -39,8 +39,8 @@ function ProductDetail() {
       <div className="mx-auto max-w-3xl px-4 py-10">
         {error.status === 404 ? (
           <div className="text-center">
-            <p className="text-slate-500">ไม่พบสินค้านี้</p>
-            <Link to="/products" className="mt-2 inline-block text-indigo-600 hover:underline">กลับไปหน้าสินค้า</Link>
+            <p className="text-muted">ไม่พบสินค้านี้</p>
+            <Link to="/products" className="mt-2 inline-block text-accent hover:underline">กลับไปหน้าสินค้า</Link>
           </div>
         ) : (
           <ErrorBox error={error} onRetry={reload} />
@@ -51,38 +51,49 @@ function ProductDetail() {
 
   const soldOut = p.stock <= 0;
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10">
-      <Link to="/products" className="text-sm text-slate-500 hover:text-indigo-600">← สินค้าทั้งหมด</Link>
-      <div className="mt-4 grid gap-8 md:grid-cols-2">
-        <div className="aspect-square rounded-2xl border border-slate-200 bg-white">
-          {p.imageUrl && <img src={p.imageUrl} alt={p.name} className="h-full w-full object-contain p-8" />}
+    <div className="mx-auto max-w-6xl px-4 py-8">
+      <nav aria-label="breadcrumb" className="flex gap-2 text-sm text-muted">
+        <Link to="/products" className="hover:text-ink">สินค้า</Link>
+        <span aria-hidden="true">/</span>
+        <Link to={`/products?category=${p.categorySlug}`} className="hover:text-ink">{p.categoryName}</Link>
+      </nav>
+      <div className="mt-6 grid gap-10 md:grid-cols-[1.2fr_1fr]">
+        <div className="aspect-square rounded-plate bg-plate">
+          {p.imageUrl && <img src={p.imageUrl} alt={p.name} className="h-full w-full object-contain p-10 mix-blend-multiply" />}
         </div>
-        <div>
-          <p className="text-sm text-slate-400">{p.categoryName}{p.brand && ` · ${p.brand}`}</p>
-          <h1 className="mt-1 text-2xl font-semibold text-slate-900">{p.name}</h1>
-          <p className="mt-4 text-3xl font-semibold text-indigo-700">{baht(p.price)}</p>
-          <p className={`mt-2 text-sm ${soldOut ? 'text-red-500' : 'text-emerald-600'}`}>
-            {soldOut ? 'สินค้าหมด' : `มีสินค้า ${p.stock} ชิ้น`}
+        <div className="md:pt-4">
+          {p.brand && <p className="text-sm font-medium text-muted">{p.brand}</p>}
+          <h1 className="mt-1 text-3xl font-semibold leading-tight tracking-tight text-ink">{p.name}</h1>
+          <p className="mt-6 text-3xl font-semibold text-ink">{baht(p.price)}</p>
+          <p className={`mt-2 flex items-center gap-2 text-sm ${soldOut ? 'text-red-700' : 'text-muted'}`}>
+            <span className={`h-2 w-2 rounded-full ${soldOut ? 'bg-red-600' : p.stock <= 5 ? 'bg-amber-500' : 'bg-emerald-600'}`} />
+            {soldOut ? 'สินค้าหมด' : p.stock <= 5 ? `เหลือ ${p.stock} ชิ้น` : 'มีสินค้าพร้อมส่ง'}
           </p>
-          <div className="mt-6 flex items-center gap-3">
+
+          <div className="mt-8 flex items-stretch gap-3 border-t border-line pt-6">
             {isLoggedIn && !soldOut && (
               <select aria-label="จำนวน" value={qty} onChange={(e) => setQty(Number(e.target.value))}
-                      className="rounded-lg border border-slate-300 px-3 py-3">
+                      className="rounded-[10px] border border-line bg-white px-3">
                 {Array.from({ length: Math.min(p.stock, 10) }, (_, i) => i + 1).map((n) => (
                   <option key={n} value={n}>{n}</option>
                 ))}
               </select>
             )}
-            <button onClick={handleAddToCart} disabled={soldOut || busy} className={`${btnPrimary} px-6 py-3`}>
+            <button onClick={handleAddToCart} disabled={soldOut || busy} className={`${btnPrimary} flex-1 py-3 text-base`}>
               {isLoggedIn ? (busy ? 'กำลังเพิ่ม...' : 'ใส่ตะกร้า') : 'เข้าสู่ระบบเพื่อสั่งซื้อ'}
             </button>
           </div>
           {msg && (
-            <p role="status" className={`mt-3 text-sm ${msg.ok ? 'text-emerald-600' : 'text-red-600'}`}>
-              {msg.text} {msg.ok && <Link to="/cart" className="underline">ไปที่ตะกร้า</Link>}
+            <p role="status" className={`mt-3 text-sm ${msg.ok ? 'text-emerald-700' : 'text-red-700'}`}>
+              {msg.text} {msg.ok && <Link to="/cart" className="font-medium underline underline-offset-2">ไปที่ตะกร้า</Link>}
             </p>
           )}
-          {p.description && <p className="mt-8 whitespace-pre-line leading-relaxed text-slate-600">{p.description}</p>}
+          {p.description && (
+            <div className="mt-10">
+              <h2 className="text-sm font-semibold text-ink">รายละเอียดสินค้า</h2>
+              <p className="mt-2 max-w-prose whitespace-pre-line leading-relaxed text-muted">{p.description}</p>
+            </div>
+          )}
         </div>
       </div>
     </div>

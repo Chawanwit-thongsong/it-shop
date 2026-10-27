@@ -35,19 +35,19 @@ function Register() {
       <h1 className="text-2xl font-semibold">สมัครสมาชิก</h1>
       <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-4">
         <label className="block">
-          <span className="text-sm text-slate-600">ชื่อที่แสดง</span>
+          <span className="text-sm text-muted">ชื่อที่แสดง</span>
           <input value={form.displayName} onChange={set('displayName')} className={`${inputClass} mt-1`} />
         </label>
         <label className="block">
-          <span className="text-sm text-slate-600">อีเมล</span>
+          <span className="text-sm text-muted">อีเมล</span>
           <input type="email" value={form.email} onChange={set('email')} autoComplete="email" className={`${inputClass} mt-1`} />
         </label>
         <label className="block">
-          <span className="text-sm text-slate-600">รหัสผ่าน (อย่างน้อย 8 ตัว)</span>
+          <span className="text-sm text-muted">รหัสผ่าน (อย่างน้อย 8 ตัว)</span>
           <input type="password" value={form.password} onChange={set('password')} autoComplete="new-password" className={`${inputClass} mt-1`} />
         </label>
         <label className="block">
-          <span className="text-sm text-slate-600">ยืนยันรหัสผ่าน</span>
+          <span className="text-sm text-muted">ยืนยันรหัสผ่าน</span>
           <input type="password" value={form.confirm} onChange={set('confirm')} autoComplete="new-password" className={`${inputClass} mt-1`} />
         </label>
         {error && <p role="alert" className="text-sm text-red-600">{error}</p>}
@@ -55,8 +55,8 @@ function Register() {
           {busy ? 'กำลังสมัคร...' : 'สมัครสมาชิก'}
         </button>
       </form>
-      <p className="mt-6 text-center text-sm text-slate-500">
-        มีบัญชีแล้ว? <Link to="/login" className="text-indigo-600 hover:underline">เข้าสู่ระบบ</Link>
+      <p className="mt-6 text-center text-sm text-muted">
+        มีบัญชีแล้ว? <Link to="/login" className="text-accent hover:underline">เข้าสู่ระบบ</Link>
       </p>
     </div>
   );

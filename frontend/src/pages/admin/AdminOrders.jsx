@@ -48,9 +48,9 @@ function AdminOrders() {
         ) : list.data.items.length === 0 ? (
           <Empty title="ไม่มีออเดอร์" />
         ) : (
-          <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <div className="overflow-x-auto rounded-plate border border-line bg-white">
             <table className="w-full text-left text-sm">
-              <thead className="bg-slate-50 text-slate-500">
+              <thead className="bg-plate text-muted">
                 <tr>
                   <th className="p-3">#</th>
                   <th className="p-3">วันที่</th>
@@ -64,9 +64,9 @@ function AdminOrders() {
                 {list.data.items.map((o) => {
                   const next = list.data.transitions[o.status] ?? []; // สถานะถัดไปที่ Go อนุญาต
                   return (
-                    <tr key={o.id} className="border-t border-slate-100">
-                      <td className="p-3"><Link to={`/admin/orders/${o.id}`} className="text-indigo-600 hover:underline">#{o.id}</Link></td>
-                      <td className="p-3 text-slate-500">{dateTime(o.createdAt)}</td>
+                    <tr key={o.id} className="border-t border-line">
+                      <td className="p-3"><Link to={`/admin/orders/${o.id}`} className="text-accent hover:underline">#{o.id}</Link></td>
+                      <td className="p-3 text-muted">{dateTime(o.createdAt)}</td>
                       <td className="p-3">{o.memberName}</td>
                       <td className="p-3 text-right">{baht(o.total)}</td>
                       <td className="p-3"><StatusBadge status={o.status} /></td>

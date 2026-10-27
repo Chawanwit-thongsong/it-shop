@@ -36,12 +36,12 @@ function Login() {
       <h1 className="text-2xl font-semibold">เข้าสู่ระบบ</h1>
       <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-4">
         <label className="block">
-          <span className="text-sm text-slate-600">อีเมล</span>
+          <span className="text-sm text-muted">อีเมล</span>
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}
                  autoComplete="email" className={`${inputClass} mt-1`} />
         </label>
         <label className="block">
-          <span className="text-sm text-slate-600">รหัสผ่าน</span>
+          <span className="text-sm text-muted">รหัสผ่าน</span>
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
                  autoComplete="current-password" className={`${inputClass} mt-1`} />
         </label>
@@ -50,8 +50,8 @@ function Login() {
           {busy ? 'กำลังเข้าสู่ระบบ...' : 'เข้าสู่ระบบ'}
         </button>
       </form>
-      <p className="mt-6 text-center text-sm text-slate-500">
-        ยังไม่มีบัญชี? <Link to="/register" className="text-indigo-600 hover:underline">สมัครสมาชิก</Link>
+      <p className="mt-6 text-center text-sm text-muted">
+        ยังไม่มีบัญชี? <Link to="/register" className="text-accent hover:underline">สมัครสมาชิก</Link>
       </p>
     </div>
   );

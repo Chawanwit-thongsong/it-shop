@@ -9,9 +9,9 @@ import { ORDER_STATUS, baht } from '../../utils/format';
 
 function Card({ label, value, to }) {
   const body = (
-    <div className="rounded-xl border border-slate-200 bg-white p-5">
-      <p className="text-sm text-slate-500">{label}</p>
-      <p className="mt-1 text-2xl font-semibold text-slate-900">{value}</p>
+    <div className="rounded-plate border border-line bg-white p-5">
+      <p className="text-sm text-muted">{label}</p>
+      <p className="mt-1 text-2xl font-semibold text-ink">{value}</p>
     </div>
   );
   return to ? <Link to={to} className="block hover:opacity-80">{body}</Link> : body;
@@ -38,7 +38,7 @@ function AdminDashboard() {
       <div className="flex flex-wrap gap-2">
         {Object.entries(ORDER_STATUS).map(([key, { label }]) => (
           <Link key={key} to={`/admin/orders?status=${key}`}
-                className="rounded-full border border-slate-200 bg-white px-3 py-1 text-sm hover:border-indigo-300">
+                className="rounded-full border border-line bg-white px-3 py-1 text-sm hover:border-accent">
             {label}: <b>{s.ordersByStatus[key] ?? 0}</b>
           </Link>
         ))}
@@ -50,12 +50,12 @@ function AdminDashboard() {
           {s.recentOrders.length === 0 ? (
             <Empty title="ยังไม่มีออเดอร์" />
           ) : (
-            <ul className="divide-y divide-slate-100 rounded-xl border border-slate-200 bg-white text-sm">
+            <ul className="divide-y divide-line rounded-plate border border-line bg-white text-sm">
               {s.recentOrders.map((o) => (
                 <li key={o.id}>
-                  <Link to={`/admin/orders/${o.id}`} className="flex items-center gap-3 p-3 hover:bg-slate-50">
+                  <Link to={`/admin/orders/${o.id}`} className="flex items-center gap-3 p-3 hover:bg-plate">
                     <span className="font-medium">#{o.id}</span>
-                    <span className="text-slate-500">{o.memberName}</span>
+                    <span className="text-muted">{o.memberName}</span>
                     <StatusBadge status={o.status} />
                     <span className="ml-auto">{baht(o.total)}</span>
                   </Link>
@@ -69,10 +69,10 @@ function AdminDashboard() {
           {s.lowStock.length === 0 ? (
             <Empty title="สต็อกยังพอทุกชิ้น" />
           ) : (
-            <ul className="divide-y divide-slate-100 rounded-xl border border-slate-200 bg-white text-sm">
+            <ul className="divide-y divide-line rounded-plate border border-line bg-white text-sm">
               {s.lowStock.map((p) => (
                 <li key={p.id}>
-                  <Link to={`/admin/products/${p.id}`} className="flex justify-between p-3 hover:bg-slate-50">
+                  <Link to={`/admin/products/${p.id}`} className="flex justify-between p-3 hover:bg-plate">
                     <span>{p.name}</span>
                     <span className="font-medium text-red-600">{p.stock} ชิ้น</span>
                   </Link>

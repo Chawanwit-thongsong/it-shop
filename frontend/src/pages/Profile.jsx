@@ -49,19 +49,19 @@ function ProfileForm({ member, token, onSaved }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 rounded-xl border border-slate-200 bg-white p-6">
+    <form onSubmit={handleSubmit} className="space-y-4 rounded-plate border border-line bg-white p-6">
       <h2 className="font-semibold">ข้อมูลส่วนตัว</h2>
-      <p className="text-sm text-slate-500">อีเมล: {member.email}</p>
+      <p className="text-sm text-muted">อีเมล: {member.email}</p>
       <label className="block">
-        <span className="text-sm text-slate-600">ชื่อที่แสดง</span>
+        <span className="text-sm text-muted">ชื่อที่แสดง</span>
         <input value={form.displayName} onChange={set('displayName')} className={`${inputClass} mt-1`} />
       </label>
       <label className="block">
-        <span className="text-sm text-slate-600">เบอร์โทร</span>
+        <span className="text-sm text-muted">เบอร์โทร</span>
         <input value={form.phone} onChange={set('phone')} className={`${inputClass} mt-1`} />
       </label>
       <label className="block">
-        <span className="text-sm text-slate-600">ที่อยู่จัดส่ง</span>
+        <span className="text-sm text-muted">ที่อยู่จัดส่ง</span>
         <textarea rows={3} value={form.address} onChange={set('address')} className={`${inputClass} mt-1`} />
       </label>
       {msg && <p role="status" className={`text-sm ${msg.ok ? 'text-emerald-600' : 'text-red-600'}`}>{msg.text}</p>}
@@ -95,18 +95,18 @@ function PasswordForm({ token }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 rounded-xl border border-slate-200 bg-white p-6">
+    <form onSubmit={handleSubmit} className="space-y-4 rounded-plate border border-line bg-white p-6">
       <h2 className="font-semibold">เปลี่ยนรหัสผ่าน</h2>
       <label className="block">
-        <span className="text-sm text-slate-600">รหัสผ่านเดิม</span>
+        <span className="text-sm text-muted">รหัสผ่านเดิม</span>
         <input type="password" value={form.current} onChange={set('current')} autoComplete="current-password" className={`${inputClass} mt-1`} />
       </label>
       <label className="block">
-        <span className="text-sm text-slate-600">รหัสผ่านใหม่</span>
+        <span className="text-sm text-muted">รหัสผ่านใหม่</span>
         <input type="password" value={form.next} onChange={set('next')} autoComplete="new-password" className={`${inputClass} mt-1`} />
       </label>
       <label className="block">
-        <span className="text-sm text-slate-600">ยืนยันรหัสผ่านใหม่</span>
+        <span className="text-sm text-muted">ยืนยันรหัสผ่านใหม่</span>
         <input type="password" value={form.confirm} onChange={set('confirm')} autoComplete="new-password" className={`${inputClass} mt-1`} />
       </label>
       {msg && <p role="status" className={`text-sm ${msg.ok ? 'text-emerald-600' : 'text-red-600'}`}>{msg.text}</p>}

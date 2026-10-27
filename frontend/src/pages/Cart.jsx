@@ -39,18 +39,18 @@ function Cart() {
       {items.length === 0 ? (
         <div className="mt-6">
           <Empty title="ตะกร้ายังว่างอยู่">
-            <Link to="/products" className="text-indigo-600 hover:underline">ไปเลือกสินค้า</Link>
+            <Link to="/products" className="text-accent hover:underline">ไปเลือกสินค้า</Link>
           </Empty>
         </div>
       ) : (
         <div className="mt-6 grid gap-6 md:grid-cols-[1fr_320px]">
-          <ul className="divide-y divide-slate-100 rounded-xl border border-slate-200 bg-white">
+          <ul className="divide-y divide-line rounded-plate border border-line bg-white">
             {items.map((it) => (
               <li key={it.productId} className="flex items-center gap-4 p-4">
                 {it.imageUrl && <img src={it.imageUrl} alt="" className="h-16 w-16 rounded object-contain" />}
                 <div className="min-w-0 flex-1">
-                  <Link to={`/products/${it.productId}`} className="font-medium hover:text-indigo-600">{it.name}</Link>
-                  <p className="text-sm text-slate-500">{baht(it.price)} / ชิ้น</p>
+                  <Link to={`/products/${it.productId}`} className="font-medium hover:text-accent">{it.name}</Link>
+                  <p className="text-sm text-muted">{baht(it.price)} / ชิ้น</p>
                   {(!it.isActive || it.qty > it.stock) && (
                     <p className="text-xs text-red-600">{it.isActive ? `เหลือเพียง ${it.stock} ชิ้น` : 'สินค้าปิดการขายแล้ว'}</p>
                   )}
@@ -103,14 +103,14 @@ function CheckoutForm({ total, member, token, onDone }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="h-fit space-y-3 rounded-xl border border-slate-200 bg-white p-5">
+    <form onSubmit={handleSubmit} noValidate className="h-fit space-y-3 rounded-plate border border-line bg-white p-5">
       <h2 className="font-semibold">ที่อยู่จัดส่ง</h2>
       <input aria-label="ชื่อผู้รับ" placeholder="ชื่อผู้รับ" value={form.shipName} onChange={set('shipName')} className={inputClass} />
       <input aria-label="เบอร์โทร" placeholder="เบอร์โทร" value={form.shipPhone} onChange={set('shipPhone')} className={inputClass} />
       <textarea aria-label="ที่อยู่" placeholder="ที่อยู่" rows={3} value={form.shipAddress} onChange={set('shipAddress')} className={inputClass} />
-      <div className="flex justify-between border-t border-slate-100 pt-3 font-semibold">
+      <div className="flex justify-between border-t border-line pt-3 font-semibold">
         <span>ยอดรวม</span>
-        <span data-testid="cart-total" className="text-indigo-700">{baht(total)}</span>
+        <span data-testid="cart-total" className="text-accent-dark">{baht(total)}</span>
       </div>
       {error && <p role="alert" className="text-sm text-red-600">{error}</p>}
       <button disabled={busy} className={`${btnPrimary} w-full py-2.5`}>{busy ? 'กำลังสั่งซื้อ...' : 'ยืนยันสั่งซื้อ'}</button>

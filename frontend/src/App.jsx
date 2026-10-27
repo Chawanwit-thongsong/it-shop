@@ -55,8 +55,11 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
-        <footer className="border-t border-slate-200 py-6 text-center text-xs text-slate-400">
-          IT Shop · โปรเจกต์วิชา Client-Server Web · ข้อมูลสินค้าตัวอย่างจาก DummyJSON
+        <footer className="mt-auto border-t border-line bg-plate">
+          <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-8 text-sm text-muted md:flex-row md:justify-between">
+            <p><span className="font-semibold text-ink">IT Shop</span> โปรเจกต์วิชา Client-Server Web</p>
+            <p>ข้อมูลสินค้าตัวอย่างจาก DummyJSON</p>
+          </div>
         </footer>
       </div>
     </AuthProvider>

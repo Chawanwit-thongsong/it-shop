@@ -58,9 +58,9 @@ function AdminProducts() {
           <Empty title="ไม่พบสินค้า" />
         ) : (
           <>
-            <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+            <div className="overflow-x-auto rounded-plate border border-line bg-white">
               <table className="w-full text-left text-sm">
-                <thead className="bg-slate-50 text-slate-500">
+                <thead className="bg-plate text-muted">
                   <tr>
                     <th className="p-3">สินค้า</th>
                     <th className="p-3">หมวด</th>
@@ -72,20 +72,20 @@ function AdminProducts() {
                 </thead>
                 <tbody>
                   {list.data.items.map((p) => (
-                    <tr key={p.id} className="border-t border-slate-100">
+                    <tr key={p.id} className="border-t border-line">
                       <td className="p-3">
                         <div className="flex items-center gap-3">
                           {p.imageUrl && <img src={p.imageUrl} alt="" className="h-10 w-10 rounded object-contain" />}
                           <span className="font-medium">{p.name}</span>
                         </div>
                       </td>
-                      <td className="p-3 text-slate-500">{p.categoryName}</td>
+                      <td className="p-3 text-muted">{p.categoryName}</td>
                       <td className="p-3 text-right">{baht(p.price)}</td>
                       <td className={`p-3 text-right ${p.stock <= 5 ? 'text-red-600' : ''}`}>{p.stock}</td>
                       <td className="p-3">
                         {p.isActive
                           ? <span className="rounded bg-emerald-50 px-2 py-0.5 text-xs text-emerald-700">เปิดขาย</span>
-                          : <span className="rounded bg-slate-100 px-2 py-0.5 text-xs text-slate-500">ปิดขาย</span>}
+                          : <span className="rounded bg-slate-100 px-2 py-0.5 text-xs text-muted">ปิดขาย</span>}
                       </td>
                       <td className="whitespace-nowrap p-3 text-right">
                         <Link to={`/admin/products/${p.id}`} className={`${btnGhost} mr-2`}>แก้ไข</Link>

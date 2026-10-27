@@ -52,7 +52,7 @@ export function ConfirmBox({ open, title, children, confirmText = 'ยืนย�
 }
 
 export const btnPrimary =
-  'inline-flex items-center justify-center rounded-[10px] bg-accent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-dark disabled:cursor-not-allowed disabled:bg-line disabled:text-muted';
+  'inline-flex items-center justify-center rounded-[10px] bg-accent px-4 py-2 text-sm font-semibold text-ink transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:bg-line disabled:text-muted';
 export const btnGhost =
   'inline-flex items-center justify-center rounded-[10px] border border-line bg-white px-4 py-2 text-sm font-medium text-ink transition-colors hover:border-ink/30 disabled:cursor-not-allowed disabled:text-muted';
 export const btnDanger =

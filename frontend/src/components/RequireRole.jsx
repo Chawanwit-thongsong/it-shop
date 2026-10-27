@@ -12,9 +12,9 @@ function RequireRole({ role, children }) {
   if (member?.role !== role) {
     return (
       <div className="px-4 py-24 text-center">
-        <p className="text-5xl font-semibold text-slate-300">403</p>
+        <p className="text-5xl font-semibold text-muted">403</p>
         <p className="mt-2 text-muted">หน้านี้สำหรับ {role} เท่านั้น</p>
-        <Link to="/" className="mt-4 inline-block text-sm text-accent hover:underline">กลับหน้าแรก</Link>
+        <Link to="/" className="mt-4 inline-block text-sm font-medium text-accent-dark underline-offset-4 hover:underline">กลับหน้าแรก</Link>
       </div>
     );
   }

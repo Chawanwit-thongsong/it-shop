@@ -40,7 +40,7 @@ function ProductDetail() {
         {error.status === 404 ? (
           <div className="text-center">
             <p className="text-muted">ไม่พบสินค้านี้</p>
-            <Link to="/products" className="mt-2 inline-block text-accent hover:underline">กลับไปหน้าสินค้า</Link>
+            <Link to="/products" className="mt-2 inline-block font-medium text-accent-dark underline-offset-4 hover:underline">กลับไปหน้าสินค้า</Link>
           </div>
         ) : (
           <ErrorBox error={error} onRetry={reload} />

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
 import { btnPrimary, inputClass } from '../components/States';
+import AuthShell from '../components/AuthShell';
 
 function Register() {
   const { register } = useAuth();
@@ -31,34 +32,34 @@ function Register() {
   }
 
   return (
-    <div className="mx-auto max-w-sm px-4 py-16">
-      <h1 className="text-2xl font-semibold">สมัครสมาชิก</h1>
-      <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-4">
+    <AuthShell title="สมัครสมาชิก"
+               footer={<>มีบัญชีแล้ว? <Link to="/login" className="font-medium text-accent-dark underline-offset-4 hover:underline">เข้าสู่ระบบ</Link></>}>
+      <form onSubmit={handleSubmit} noValidate className="mt-8 space-y-4">
         <label className="block">
-          <span className="text-sm text-muted">ชื่อที่แสดง</span>
-          <input value={form.displayName} onChange={set('displayName')} className={`${inputClass} mt-1`} />
+          <span className="text-sm font-medium text-ink">ชื่อที่แสดง</span>
+          <input value={form.displayName} onChange={set('displayName')} className={`${inputClass} mt-1.5`} />
         </label>
         <label className="block">
-          <span className="text-sm text-muted">อีเมล</span>
-          <input type="email" value={form.email} onChange={set('email')} autoComplete="email" className={`${inputClass} mt-1`} />
+          <span className="text-sm font-medium text-ink">อีเมล</span>
+          <input type="email" value={form.email} onChange={set('email')} autoComplete="email" className={`${inputClass} mt-1.5`} />
         </label>
-        <label className="block">
-          <span className="text-sm text-muted">รหัสผ่าน (อย่างน้อย 8 ตัว)</span>
-          <input type="password" value={form.password} onChange={set('password')} autoComplete="new-password" className={`${inputClass} mt-1`} />
-        </label>
-        <label className="block">
-          <span className="text-sm text-muted">ยืนยันรหัสผ่าน</span>
-          <input type="password" value={form.confirm} onChange={set('confirm')} autoComplete="new-password" className={`${inputClass} mt-1`} />
-        </label>
-        {error && <p role="alert" className="text-sm text-red-600">{error}</p>}
-        <button type="submit" disabled={busy} className={`${btnPrimary} w-full py-2.5`}>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <label className="block">
+            <span className="text-sm font-medium text-ink">รหัสผ่าน</span>
+            <input type="password" value={form.password} onChange={set('password')} autoComplete="new-password" className={`${inputClass} mt-1.5`} />
+          </label>
+          <label className="block">
+            <span className="text-sm font-medium text-ink">ยืนยันรหัสผ่าน</span>
+            <input type="password" value={form.confirm} onChange={set('confirm')} autoComplete="new-password" className={`${inputClass} mt-1.5`} />
+          </label>
+        </div>
+        <p className="text-xs text-muted">รหัสผ่านอย่างน้อย 8 ตัวอักษร</p>
+        {error && <p role="alert" className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
+        <button type="submit" disabled={busy} className={`${btnPrimary} w-full py-3 text-base`}>
           {busy ? 'กำลังสมัคร...' : 'สมัครสมาชิก'}
         </button>
       </form>
-      <p className="mt-6 text-center text-sm text-muted">
-        มีบัญชีแล้ว? <Link to="/login" className="text-accent hover:underline">เข้าสู่ระบบ</Link>
-      </p>
-    </div>
+    </AuthShell>
   );
 }
 

@@ -15,7 +15,7 @@ function Profile() {
   }
   return (
     <div className="mx-auto max-w-xl space-y-8 px-4 py-10">
-      <h1 className="text-2xl font-semibold">โปรไฟล์ของฉัน</h1>
+      <h1 className="text-3xl font-semibold tracking-tight">โปรไฟล์ของฉัน</h1>
       <ProfileForm member={me.data} token={token} onSaved={saveMember} />
       <PasswordForm token={token} />
     </div>
@@ -64,7 +64,7 @@ function ProfileForm({ member, token, onSaved }) {
         <span className="text-sm text-muted">ที่อยู่จัดส่ง</span>
         <textarea rows={3} value={form.address} onChange={set('address')} className={`${inputClass} mt-1`} />
       </label>
-      {msg && <p role="status" className={`text-sm ${msg.ok ? 'text-emerald-600' : 'text-red-600'}`}>{msg.text}</p>}
+      {msg && <p role="status" className={`text-sm ${msg.ok ? 'text-emerald-700' : 'text-red-700'}`}>{msg.text}</p>}
       <button disabled={busy} className={btnPrimary}>{busy ? 'กำลังบันทึก...' : 'บันทึก'}</button>
     </form>
   );
@@ -109,7 +109,7 @@ function PasswordForm({ token }) {
         <span className="text-sm text-muted">ยืนยันรหัสผ่านใหม่</span>
         <input type="password" value={form.confirm} onChange={set('confirm')} autoComplete="new-password" className={`${inputClass} mt-1`} />
       </label>
-      {msg && <p role="status" className={`text-sm ${msg.ok ? 'text-emerald-600' : 'text-red-600'}`}>{msg.text}</p>}
+      {msg && <p role="status" className={`text-sm ${msg.ok ? 'text-emerald-700' : 'text-red-700'}`}>{msg.text}</p>}
       <button disabled={busy} className={btnPrimary}>{busy ? 'กำลังเปลี่ยน...' : 'เปลี่ยนรหัสผ่าน'}</button>
     </form>
   );

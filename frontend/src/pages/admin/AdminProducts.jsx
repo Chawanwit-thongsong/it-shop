@@ -38,7 +38,7 @@ function AdminProducts() {
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-semibold">จัดการสินค้า</h1>
+        <h1 className="text-3xl font-semibold tracking-tight">จัดการสินค้า</h1>
         <Link to="/admin/products/new" className={btnPrimary}>+ เพิ่มสินค้า</Link>
       </div>
 
@@ -47,7 +47,7 @@ function AdminProducts() {
         <button className={btnGhost}>ค้นหา</button>
       </form>
 
-      {actionError && <p role="alert" className="mt-4 text-sm text-red-600">{actionError}</p>}
+      {actionError && <p role="alert" className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{actionError}</p>}
 
       <div className="mt-6">
         {list.loading ? (
@@ -60,7 +60,7 @@ function AdminProducts() {
           <>
             <div className="overflow-x-auto rounded-plate border border-line bg-white">
               <table className="w-full text-left text-sm">
-                <thead className="bg-plate text-muted">
+                <thead className="bg-plate text-xs font-medium text-muted">
                   <tr>
                     <th className="p-3">สินค้า</th>
                     <th className="p-3">หมวด</th>
@@ -72,7 +72,7 @@ function AdminProducts() {
                 </thead>
                 <tbody>
                   {list.data.items.map((p) => (
-                    <tr key={p.id} className="border-t border-line">
+                    <tr key={p.id} className="border-t border-line transition-colors hover:bg-plate/60">
                       <td className="p-3">
                         <div className="flex items-center gap-3">
                           {p.imageUrl && <img src={p.imageUrl} alt="" className="h-10 w-10 rounded object-contain" />}
@@ -81,11 +81,11 @@ function AdminProducts() {
                       </td>
                       <td className="p-3 text-muted">{p.categoryName}</td>
                       <td className="p-3 text-right">{baht(p.price)}</td>
-                      <td className={`p-3 text-right ${p.stock <= 5 ? 'text-red-600' : ''}`}>{p.stock}</td>
+                      <td className={`p-3 text-right ${p.stock <= 5 ? 'text-red-700' : ''}`}>{p.stock}</td>
                       <td className="p-3">
                         {p.isActive
                           ? <span className="rounded bg-emerald-50 px-2 py-0.5 text-xs text-emerald-700">เปิดขาย</span>
-                          : <span className="rounded bg-slate-100 px-2 py-0.5 text-xs text-muted">ปิดขาย</span>}
+                          : <span className="rounded bg-plate px-2 py-0.5 text-xs text-muted">ปิดขาย</span>}
                       </td>
                       <td className="whitespace-nowrap p-3 text-right">
                         <Link to={`/admin/products/${p.id}`} className={`${btnGhost} mr-2`}>แก้ไข</Link>

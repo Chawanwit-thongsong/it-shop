@@ -55,9 +55,9 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
-        <footer className="mt-auto border-t border-line bg-plate">
-          <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-8 text-sm text-muted md:flex-row md:justify-between">
-            <p><span className="font-semibold text-ink">IT Shop</span> โปรเจกต์วิชา Client-Server Web</p>
+        <footer className="mt-auto bg-ink text-white/60">
+          <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-8 text-sm md:flex-row md:justify-between">
+            <p><span className="font-semibold text-white">IT Shop</span> โปรเจกต์วิชา Client-Server Web</p>
             <p>ข้อมูลสินค้าตัวอย่างจาก DummyJSON</p>
           </div>
         </footer>

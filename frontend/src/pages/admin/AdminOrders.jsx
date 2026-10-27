@@ -31,14 +31,14 @@ function AdminOrders() {
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-semibold">จัดการออเดอร์</h1>
+        <h1 className="text-3xl font-semibold tracking-tight">จัดการออเดอร์</h1>
         <select aria-label="กรองสถานะ" value={status} onChange={(e) => setParams(e.target.value ? { status: e.target.value } : {})}
                 className={`${inputClass} w-48`}>
           <option value="">ทุกสถานะ</option>
           {Object.entries(ORDER_STATUS).map(([k, { label }]) => <option key={k} value={k}>{label}</option>)}
         </select>
       </div>
-      {error && <p role="alert" className="mt-4 text-sm text-red-600">{error}</p>}
+      {error && <p role="alert" className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
 
       <div className="mt-6">
         {list.loading ? (
@@ -50,7 +50,7 @@ function AdminOrders() {
         ) : (
           <div className="overflow-x-auto rounded-plate border border-line bg-white">
             <table className="w-full text-left text-sm">
-              <thead className="bg-plate text-muted">
+              <thead className="bg-plate text-xs font-medium text-muted">
                 <tr>
                   <th className="p-3">#</th>
                   <th className="p-3">วันที่</th>
@@ -64,19 +64,19 @@ function AdminOrders() {
                 {list.data.items.map((o) => {
                   const next = list.data.transitions[o.status] ?? []; // สถานะถัดไปที่ Go อนุญาต
                   return (
-                    <tr key={o.id} className="border-t border-line">
-                      <td className="p-3"><Link to={`/admin/orders/${o.id}`} className="text-accent hover:underline">#{o.id}</Link></td>
+                    <tr key={o.id} className="border-t border-line transition-colors hover:bg-plate/60">
+                      <td className="p-3"><Link to={`/admin/orders/${o.id}`} className="font-medium text-accent-dark underline-offset-4 hover:underline">#{o.id}</Link></td>
                       <td className="p-3 text-muted">{dateTime(o.createdAt)}</td>
                       <td className="p-3">{o.memberName}</td>
                       <td className="p-3 text-right">{baht(o.total)}</td>
                       <td className="p-3"><StatusBadge status={o.status} /></td>
                       <td className="p-3">
                         {next.length === 0 ? (
-                          <span className="text-slate-300">-</span>
+                          <span className="text-muted">-</span>
                         ) : (
                           <select aria-label={`เปลี่ยนสถานะออเดอร์ ${o.id}`} value="" disabled={busyId === o.id}
                                   onChange={(e) => changeStatus(o, e.target.value)}
-                                  className="rounded-lg border border-slate-300 px-2 py-1">
+                                  className="rounded-lg border border-line px-2 py-1">
                             <option value="" disabled>เลือก...</option>
                             {next.map((s) => <option key={s} value={s}>{ORDER_STATUS[s].label}</option>)}
                           </select>

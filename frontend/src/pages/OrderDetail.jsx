@@ -39,12 +39,12 @@ function OrderDetail() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
-      <Link to="/orders" className="text-sm text-muted hover:text-accent">กลับไปออเดอร์ของฉัน</Link>
+      <Link to="/orders" className="text-sm text-muted hover:text-accent-dark">กลับไปออเดอร์ของฉัน</Link>
       {location.state?.justOrdered && (
         <p className="mt-4 rounded-lg bg-emerald-50 p-3 text-sm text-emerald-700">สั่งซื้อสำเร็จ ขอบคุณที่ใช้บริการ</p>
       )}
       <div className="mt-4"><OrderView order={order.data} /></div>
-      {error && <p role="alert" className="mt-4 text-sm text-red-600">{error}</p>}
+      {error && <p role="alert" className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
       {order.data.status === 'pending' && (
         <button onClick={() => setConfirm(true)} className={`${btnDanger} mt-6`}>ยกเลิกออเดอร์</button>
       )}

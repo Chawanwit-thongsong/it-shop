@@ -57,9 +57,9 @@ function Home() {
               </Link>
             ))}
             <Link to="/products"
-                  className="col-span-2 flex items-center justify-between rounded-plate bg-ink px-5 py-6 text-white transition-colors hover:bg-accent-dark md:col-span-3">
+                  className="col-span-2 flex items-center justify-between rounded-plate bg-accent px-5 py-6 text-ink transition-colors hover:bg-accent-hover md:col-span-3">
               <span className="text-lg font-semibold">ดูสินค้าทั้งหมด</span>
-              <span className="text-sm text-white/70">{all.data.total} รายการ</span>
+              <span className="text-sm font-medium text-ink/70">{all.data.total} รายการ</span>
             </Link>
           </div>
         )}
@@ -68,7 +68,7 @@ function Home() {
       <section className="py-16">
         <div className="mb-6 flex items-end justify-between">
           <h2 className="text-2xl font-semibold tracking-tight">เข้าใหม่</h2>
-          <Link to="/products" className="text-sm font-medium text-accent hover:underline">ดูทั้งหมด</Link>
+          <Link to="/products" className="text-sm font-medium font-medium text-accent-dark underline-offset-4 hover:underline">ดูทั้งหมด</Link>
         </div>
         {loading ? (
           <Loading />

@@ -40,10 +40,10 @@ function HeaderSearch() {
 
   return (
     <form onSubmit={handleSubmit} role="search" className="relative w-full">
-      <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted"><SearchIcon /></span>
+      <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/50"><SearchIcon /></span>
       <input value={text} onChange={(e) => setText(e.target.value)} placeholder="ค้นหาสินค้า เช่น iPhone, MacBook"
              aria-label="ค้นหาจากหัวเว็บ"
-             className="w-full rounded-full border border-line bg-plate py-2.5 pl-10 pr-4 text-sm text-ink placeholder:text-muted/80 focus:border-accent focus:bg-white focus:outline-none focus:ring-4 focus:ring-accent-soft" />
+             className="w-full rounded-full border border-coal bg-coal py-2.5 pl-10 pr-4 text-sm text-white placeholder:text-white/45 focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/25" />
     </form>
   );
 }
@@ -62,13 +62,14 @@ function Navbar() {
   }
 
   const catLink = (active) =>
-    `whitespace-nowrap border-b-2 py-3 text-sm transition-colors ${active ? 'border-ink font-medium text-ink' : 'border-transparent text-muted hover:text-ink'}`;
+    `whitespace-nowrap border-b-2 py-3 text-sm transition-colors ${active ? 'border-accent font-medium text-white' : 'border-transparent text-white/60 hover:text-white'}`;
+  const navText = 'rounded-full px-3 py-2 text-white/70 transition-colors hover:text-white';
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-white">
+    <header className="sticky top-0 z-40 bg-ink text-white">
       <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3 md:gap-8">
         <Link to="/" className="flex shrink-0 items-center gap-2" aria-label="IT Shop หน้าแรก">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-ink text-[13px] font-bold text-white">IT</span>
+          <span className="grid h-8 w-8 place-items-center rounded-lg bg-accent text-[13px] font-bold text-ink">IT</span>
           <span className="hidden text-lg font-semibold tracking-tight sm:inline">IT Shop</span>
         </Link>
 
@@ -77,24 +78,24 @@ function Navbar() {
         {/* เมนูขวาเปลี่ยนตามบทบาท: Guest / Member / Admin */}
         <nav className="ml-auto flex items-center gap-1 text-sm md:ml-0">
           {isAdmin && (
-            <NavLink to="/admin" className="rounded-full px-3 py-2 font-medium text-accent hover:bg-accent-soft">หลังบ้าน</NavLink>
+            <NavLink to="/admin" className="rounded-full px-3 py-2 font-medium text-accent hover:bg-white/10">หลังบ้าน</NavLink>
           )}
           {isLoggedIn ? (
             <>
-              <NavLink to="/orders" className="hidden rounded-full px-3 py-2 text-muted hover:text-ink sm:block">ออเดอร์</NavLink>
-              <NavLink to="/profile" className="max-w-[9rem] truncate rounded-full px-3 py-2 text-muted hover:text-ink">
+              <NavLink to="/orders" className={`hidden sm:block ${navText}`}>ออเดอร์</NavLink>
+              <NavLink to="/profile" className={`max-w-[9rem] truncate ${navText}`}>
                 {member?.displayName}
               </NavLink>
-              <button onClick={handleLogout} className="rounded-full px-3 py-2 text-muted hover:text-ink">ออกจากระบบ</button>
+              <button onClick={handleLogout} className={navText}>ออกจากระบบ</button>
               <NavLink to="/cart" aria-label="ตะกร้า"
-                       className={({ isActive }) => `ml-1 grid h-10 w-10 place-items-center rounded-full ${isActive ? 'bg-ink text-white' : 'bg-plate text-ink hover:bg-line'}`}>
+                       className={({ isActive }) => `ml-1 grid h-10 w-10 place-items-center rounded-full transition-colors ${isActive ? 'bg-accent text-ink' : 'bg-coal text-white hover:bg-white/15'}`}>
                 <CartIcon />
               </NavLink>
             </>
           ) : (
             <>
-              <NavLink to="/login" className="rounded-full px-3 py-2 text-muted hover:text-ink">เข้าสู่ระบบ</NavLink>
-              <Link to="/register" className="rounded-full bg-ink px-4 py-2 font-medium text-white hover:bg-ink/85">สมัครสมาชิก</Link>
+              <NavLink to="/login" className={navText}>เข้าสู่ระบบ</NavLink>
+              <Link to="/register" className="rounded-full bg-accent px-4 py-2 font-semibold text-ink transition-colors hover:bg-accent-hover">สมัครสมาชิก</Link>
             </>
           )}
         </nav>
@@ -103,7 +104,7 @@ function Navbar() {
       <div className="mx-auto max-w-6xl px-4 pb-3 md:hidden"><HeaderSearch /></div>
 
       {/* แถบหมวดสินค้า ดึงจาก API */}
-      <div className="border-t border-line">
+      <div className="border-t border-white/10">
         <nav aria-label="หมวดสินค้า" className="mx-auto flex max-w-6xl gap-6 overflow-x-auto px-4">
           <Link to="/products" className={catLink(activeCat === '')}>สินค้าทั้งหมด</Link>
           {cats.data?.map((c) => (

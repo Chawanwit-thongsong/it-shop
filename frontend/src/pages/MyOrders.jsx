@@ -13,7 +13,7 @@ function MyOrders() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
-      <h1 className="text-2xl font-semibold">ออเดอร์ของฉัน</h1>
+      <h1 className="text-3xl font-semibold tracking-tight">ออเดอร์ของฉัน</h1>
       <div className="mt-6">
         {orders.loading ? (
           <Loading />
@@ -21,19 +21,19 @@ function MyOrders() {
           <ErrorBox error={orders.error} onRetry={orders.reload} />
         ) : orders.data.length === 0 ? (
           <Empty title="ยังไม่มีออเดอร์">
-            <Link to="/products" className="text-accent hover:underline">ไปเลือกสินค้า</Link>
+            <Link to="/products" className="font-medium text-accent-dark underline-offset-4 hover:underline">ไปเลือกสินค้า</Link>
           </Empty>
         ) : (
           <ul className="space-y-3">
             {orders.data.map((o) => (
               <li key={o.id}>
                 <Link to={`/orders/${o.id}`}
-                      className="flex flex-wrap items-center gap-4 rounded-plate border border-line bg-white p-4 hover:border-accent">
-                  <span className="font-medium">#{o.id}</span>
+                      className="flex flex-wrap items-center gap-x-6 gap-y-2 rounded-plate border border-line bg-white p-5 transition-colors hover:border-ink/30">
+                  <span className="text-lg font-semibold">#{o.id}</span>
                   <span className="text-sm text-muted">{dateTime(o.createdAt)}</span>
                   <span className="text-sm text-muted">{o.itemCount} ชิ้น</span>
                   <StatusBadge status={o.status} />
-                  <span className="ml-auto font-semibold text-accent-dark">{baht(o.total)}</span>
+                  <span className="ml-auto text-lg font-semibold text-ink">{baht(o.total)}</span>
                 </Link>
               </li>
             ))}

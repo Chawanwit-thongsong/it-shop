@@ -6,7 +6,7 @@ function OrderView({ order, showMember = false }) {
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center gap-3">
-        <h1 className="text-2xl font-semibold">ออเดอร์ #{order.id}</h1>
+        <h1 className="text-3xl font-semibold tracking-tight">ออเดอร์ #{order.id}</h1>
         <StatusBadge status={order.status} />
         <span className="text-sm text-muted">{dateTime(order.createdAt)}</span>
       </div>
@@ -29,7 +29,7 @@ function OrderView({ order, showMember = false }) {
         ))}
         <li className="flex justify-between p-4 font-semibold">
           <span>ยอดรวม</span>
-          <span className="text-accent-dark">{baht(order.total)}</span>
+          <span className="text-ink">{baht(order.total)}</span>
         </li>
       </ul>
     </div>

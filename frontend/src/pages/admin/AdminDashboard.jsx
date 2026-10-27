@@ -7,14 +7,14 @@ import StatusBadge from '../../components/StatusBadge';
 import { Empty, ErrorBox, Loading } from '../../components/States';
 import { ORDER_STATUS, baht } from '../../utils/format';
 
-function Card({ label, value, to }) {
+function Card({ label, value, to, dark = false }) {
   const body = (
-    <div className="rounded-plate border border-line bg-white p-5">
-      <p className="text-sm text-muted">{label}</p>
-      <p className="mt-1 text-2xl font-semibold text-ink">{value}</p>
+    <div className={`h-full rounded-plate p-5 ${dark ? 'bg-ink text-white' : 'border border-line bg-white'}`}>
+      <p className={`text-sm ${dark ? 'text-white/60' : 'text-muted'}`}>{label}</p>
+      <p className={`mt-2 text-3xl font-semibold tracking-tight ${dark ? 'text-accent' : 'text-ink'}`}>{value}</p>
     </div>
   );
-  return to ? <Link to={to} className="block hover:opacity-80">{body}</Link> : body;
+  return to ? <Link to={to} className="block transition-opacity hover:opacity-80">{body}</Link> : body;
 }
 
 function AdminDashboard() {
@@ -27,9 +27,9 @@ function AdminDashboard() {
   const s = stats.data;
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold">Dashboard</h1>
+      <h1 className="text-3xl font-semibold tracking-tight">Dashboard</h1>
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <Card label="ยอดขาย (ชำระแล้ว)" value={baht(s.revenue)} />
+        <Card label="ยอดขาย (ชำระแล้ว)" value={baht(s.revenue)} dark />
         <Card label="ออเดอร์ทั้งหมด" value={s.orders} to="/admin/orders" />
         <Card label="สินค้าที่เปิดขาย" value={`${s.activeProducts} / ${s.products}`} to="/admin/products" />
         <Card label="สมาชิก" value={s.members} to="/admin/members" />
@@ -38,8 +38,9 @@ function AdminDashboard() {
       <div className="flex flex-wrap gap-2">
         {Object.entries(ORDER_STATUS).map(([key, { label }]) => (
           <Link key={key} to={`/admin/orders?status=${key}`}
-                className="rounded-full border border-line bg-white px-3 py-1 text-sm hover:border-accent">
-            {label}: <b>{s.ordersByStatus[key] ?? 0}</b>
+                className="inline-flex items-center gap-2 rounded-full border border-line bg-white py-1 pl-3 pr-1 text-sm transition-colors hover:border-ink/30">
+            {label}
+            <span className="min-w-[1.75rem] rounded-full bg-plate px-2 py-0.5 text-center text-xs font-semibold">{s.ordersByStatus[key] ?? 0}</span>
           </Link>
         ))}
       </div>
@@ -74,7 +75,7 @@ function AdminDashboard() {
                 <li key={p.id}>
                   <Link to={`/admin/products/${p.id}`} className="flex justify-between p-3 hover:bg-plate">
                     <span>{p.name}</span>
-                    <span className="font-medium text-red-600">{p.stock} ชิ้น</span>
+                    <span className="font-medium text-red-700">{p.stock} ชิ้น</span>
                   </Link>
                 </li>
               ))}

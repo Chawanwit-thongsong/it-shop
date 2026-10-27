@@ -63,7 +63,7 @@ function AdminProductForm() {
 
   return (
     <div className="max-w-2xl">
-      <h1 className="text-2xl font-semibold">{isEdit ? 'แก้ไขสินค้า' : 'เพิ่มสินค้า'}</h1>
+      <h1 className="text-3xl font-semibold tracking-tight">{isEdit ? 'แก้ไขสินค้า' : 'เพิ่มสินค้า'}</h1>
       <form onSubmit={handleSubmit} noValidate className="mt-6 grid gap-4 rounded-plate border border-line bg-white p-6 md:grid-cols-2">
         <label className="block md:col-span-2">
           <span className="text-sm text-muted">ชื่อสินค้า *</span>
@@ -100,7 +100,7 @@ function AdminProductForm() {
           <input type="checkbox" checked={form.isActive} onChange={set('isActive')} />
           <span className="text-sm text-muted">เปิดขาย (แสดงในหน้าร้าน)</span>
         </label>
-        {error && <p role="alert" className="text-sm text-red-600 md:col-span-2">{error}</p>}
+        {error && <p role="alert" className="text-sm text-red-700 md:col-span-2">{error}</p>}
         <div className="flex gap-2 md:col-span-2">
           <button disabled={busy} className={btnPrimary}>{busy ? 'กำลังบันทึก...' : 'บันทึก'}</button>
           <Link to="/admin/products" className={btnGhost}>ยกเลิก</Link>

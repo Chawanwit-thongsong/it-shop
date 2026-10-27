@@ -33,40 +33,42 @@ function Cart() {
   const { items, total } = cart.data;
   return (
     <div className="mx-auto max-w-5xl px-4 py-10">
-      <h1 className="text-2xl font-semibold">ตะกร้าสินค้า</h1>
-      {error && <p role="alert" className="mt-4 text-sm text-red-600">{error}</p>}
+      <h1 className="text-3xl font-semibold tracking-tight">ตะกร้าสินค้า</h1>
+      {error && <p role="alert" className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
 
       {items.length === 0 ? (
         <div className="mt-6">
           <Empty title="ตะกร้ายังว่างอยู่">
-            <Link to="/products" className="text-accent hover:underline">ไปเลือกสินค้า</Link>
+            <Link to="/products" className="font-medium text-accent-dark underline-offset-4 hover:underline">ไปเลือกสินค้า</Link>
           </Empty>
         </div>
       ) : (
         <div className="mt-6 grid gap-6 md:grid-cols-[1fr_320px]">
           <ul className="divide-y divide-line rounded-plate border border-line bg-white">
             {items.map((it) => (
-              <li key={it.productId} className="flex items-center gap-4 p-4">
-                {it.imageUrl && <img src={it.imageUrl} alt="" className="h-16 w-16 rounded object-contain" />}
+              <li key={it.productId} className="flex flex-wrap items-center gap-4 p-4 sm:flex-nowrap">
+                <div className="h-20 w-20 shrink-0 rounded-lg bg-plate">
+                  {it.imageUrl && <img src={it.imageUrl} alt="" className="h-full w-full object-contain p-2 mix-blend-multiply" />}
+                </div>
                 <div className="min-w-0 flex-1">
-                  <Link to={`/products/${it.productId}`} className="font-medium hover:text-accent">{it.name}</Link>
-                  <p className="text-sm text-muted">{baht(it.price)} / ชิ้น</p>
+                  <Link to={`/products/${it.productId}`} className="font-medium leading-snug hover:underline">{it.name}</Link>
+                  <p className="mt-0.5 text-sm text-muted">{baht(it.price)} ต่อชิ้น</p>
                   {(!it.isActive || it.qty > it.stock) && (
-                    <p className="text-xs text-red-600">{it.isActive ? `เหลือเพียง ${it.stock} ชิ้น` : 'สินค้าปิดการขายแล้ว'}</p>
+                    <p className="mt-1 text-xs font-medium text-red-700">{it.isActive ? `เหลือเพียง ${it.stock} ชิ้น` : 'สินค้าปิดการขายแล้ว'}</p>
                   )}
                 </div>
                 <label className="sr-only" htmlFor={`qty-${it.productId}`}>จำนวน {it.name}</label>
                 <select id={`qty-${it.productId}`} value={it.qty} disabled={busyId === it.productId}
                         onChange={(e) => run(it.productId, () => api.setCartQty(it.productId, Number(e.target.value), token))}
-                        className="rounded-lg border border-slate-300 px-2 py-1">
+                        className="rounded-lg border border-line bg-white px-2 py-1.5">
                   {Array.from({ length: Math.max(it.qty, Math.min(it.stock, 10)) }, (_, i) => i + 1).map((n) => (
                     <option key={n} value={n}>{n}</option>
                   ))}
                 </select>
-                <p className="w-24 text-right font-medium">{baht(it.subtotal)}</p>
+                <p className="w-24 text-right font-semibold">{baht(it.subtotal)}</p>
                 <button onClick={() => run(it.productId, () => api.removeFromCart(it.productId, token))}
                         disabled={busyId === it.productId} aria-label={`ลบ ${it.name}`}
-                        className="text-sm text-slate-400 hover:text-red-600">ลบ</button>
+                        className="text-sm text-muted underline-offset-4 hover:text-red-700 hover:underline">ลบ</button>
               </li>
             ))}
           </ul>
@@ -103,17 +105,17 @@ function CheckoutForm({ total, member, token, onDone }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="h-fit space-y-3 rounded-plate border border-line bg-white p-5">
+    <form onSubmit={handleSubmit} noValidate className="h-fit space-y-3 rounded-plate bg-plate p-5 md:sticky md:top-36">
       <h2 className="font-semibold">ที่อยู่จัดส่ง</h2>
       <input aria-label="ชื่อผู้รับ" placeholder="ชื่อผู้รับ" value={form.shipName} onChange={set('shipName')} className={inputClass} />
       <input aria-label="เบอร์โทร" placeholder="เบอร์โทร" value={form.shipPhone} onChange={set('shipPhone')} className={inputClass} />
       <textarea aria-label="ที่อยู่" placeholder="ที่อยู่" rows={3} value={form.shipAddress} onChange={set('shipAddress')} className={inputClass} />
-      <div className="flex justify-between border-t border-line pt-3 font-semibold">
-        <span>ยอดรวม</span>
-        <span data-testid="cart-total" className="text-accent-dark">{baht(total)}</span>
+      <div className="flex items-baseline justify-between border-t border-line pt-4">
+        <span className="text-sm text-muted">ยอดรวม</span>
+        <span data-testid="cart-total" className="text-2xl font-semibold text-ink">{baht(total)}</span>
       </div>
-      {error && <p role="alert" className="text-sm text-red-600">{error}</p>}
-      <button disabled={busy} className={`${btnPrimary} w-full py-2.5`}>{busy ? 'กำลังสั่งซื้อ...' : 'ยืนยันสั่งซื้อ'}</button>
+      {error && <p role="alert" className="text-sm text-red-700">{error}</p>}
+      <button disabled={busy} className={`${btnPrimary} w-full py-3 text-base`}>{busy ? 'กำลังสั่งซื้อ...' : 'ยืนยันสั่งซื้อ'}</button>
     </form>
   );
 }

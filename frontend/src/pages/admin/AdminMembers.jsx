@@ -28,8 +28,8 @@ function AdminMembers() {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold">จัดการสมาชิก</h1>
-      {error && <p role="alert" className="mt-4 text-sm text-red-600">{error}</p>}
+      <h1 className="text-3xl font-semibold tracking-tight">จัดการสมาชิก</h1>
+      {error && <p role="alert" className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
       <div className="mt-6">
         {list.loading ? (
           <Loading />
@@ -40,7 +40,7 @@ function AdminMembers() {
         ) : (
           <div className="overflow-x-auto rounded-plate border border-line bg-white">
             <table className="w-full text-left text-sm">
-              <thead className="bg-plate text-muted">
+              <thead className="bg-plate text-xs font-medium text-muted">
                 <tr>
                   <th className="p-3">ชื่อ</th>
                   <th className="p-3">อีเมล</th>
@@ -53,18 +53,18 @@ function AdminMembers() {
                 {list.data.map((m) => {
                   const nextRole = m.role === 'admin' ? 'member' : 'admin';
                   return (
-                    <tr key={m.id} className="border-t border-line">
+                    <tr key={m.id} className="border-t border-line transition-colors hover:bg-plate/60">
                       <td className="p-3 font-medium">{m.displayName}</td>
                       <td className="p-3 text-muted">{m.email}</td>
                       <td className="p-3 text-muted">{dateTime(m.createdAt)}</td>
                       <td className="p-3">
-                        <span className={`rounded px-2 py-0.5 text-xs ${m.role === 'admin' ? 'bg-accent-soft text-accent-dark' : 'bg-slate-100 text-muted'}`}>
+                        <span className={`rounded px-2 py-0.5 text-xs ${m.role === 'admin' ? 'bg-accent-soft text-accent-dark' : 'bg-plate text-muted'}`}>
                           {m.role}
                         </span>
                       </td>
                       <td className="p-3 text-right">
                         {m.id === me?.id ? (
-                          <span className="text-xs text-slate-400">(คุณ)</span>
+                          <span className="text-xs text-muted">(คุณ)</span>
                         ) : (
                           <button onClick={() => setTarget({ member: m, role: nextRole })} className={btnGhost}>
                             {nextRole === 'admin' ? 'ตั้งเป็น admin' : 'ลดเป็น member'}

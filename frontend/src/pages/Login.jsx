@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
 import { btnPrimary, inputClass } from '../components/States';
+import AuthShell from '../components/AuthShell';
 
 function Login() {
   const { login } = useAuth();
@@ -32,28 +33,25 @@ function Login() {
   }
 
   return (
-    <div className="mx-auto max-w-sm px-4 py-16">
-      <h1 className="text-2xl font-semibold">เข้าสู่ระบบ</h1>
-      <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-4">
+    <AuthShell title="เข้าสู่ระบบ"
+               footer={<>ยังไม่มีบัญชี? <Link to="/register" className="font-medium text-accent-dark underline-offset-4 hover:underline">สมัครสมาชิก</Link></>}>
+      <form onSubmit={handleSubmit} noValidate className="mt-8 space-y-4">
         <label className="block">
-          <span className="text-sm text-muted">อีเมล</span>
+          <span className="text-sm font-medium text-ink">อีเมล</span>
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}
-                 autoComplete="email" className={`${inputClass} mt-1`} />
+                 autoComplete="email" className={`${inputClass} mt-1.5`} />
         </label>
         <label className="block">
-          <span className="text-sm text-muted">รหัสผ่าน</span>
+          <span className="text-sm font-medium text-ink">รหัสผ่าน</span>
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
-                 autoComplete="current-password" className={`${inputClass} mt-1`} />
+                 autoComplete="current-password" className={`${inputClass} mt-1.5`} />
         </label>
-        {error && <p role="alert" className="text-sm text-red-600">{error}</p>}
-        <button type="submit" disabled={busy} className={`${btnPrimary} w-full py-2.5`}>
+        {error && <p role="alert" className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
+        <button type="submit" disabled={busy} className={`${btnPrimary} w-full py-3 text-base`}>
           {busy ? 'กำลังเข้าสู่ระบบ...' : 'เข้าสู่ระบบ'}
         </button>
       </form>
-      <p className="mt-6 text-center text-sm text-muted">
-        ยังไม่มีบัญชี? <Link to="/register" className="text-accent hover:underline">สมัครสมาชิก</Link>
-      </p>
-    </div>
+    </AuthShell>
   );
 }
 

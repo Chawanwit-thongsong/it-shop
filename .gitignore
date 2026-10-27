@@ -1,0 +1,16 @@
+# dependencies
+node_modules/
+
+# build
+frontend/build/
+backend/app
+backend/*.exe
+
+# secrets: ห้ามขึ้น GitHub (commit แค่ .env.example)
+.env
+.env.local
+.env.*.local
+
+# misc
+.DS_Store
+npm-debug.log*

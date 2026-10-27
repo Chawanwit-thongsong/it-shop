@@ -30,15 +30,27 @@ func routes(h *handler.Handler, tickets *auth.Issuer) *http.ServeMux {
 	mux.HandleFunc("GET /api/me", login(h.Me))
 	mux.HandleFunc("PUT /api/me", login(h.UpdateMe))
 	mux.HandleFunc("PUT /api/me/password", login(h.ChangePassword))
-	// TODO รอบถัดไป: /api/cart, /api/orders
+	mux.HandleFunc("GET /api/cart", login(h.GetCart))
+	mux.HandleFunc("POST /api/cart", login(h.AddToCart))
+	mux.HandleFunc("PUT /api/cart/{productId}", login(h.SetCartQty))
+	mux.HandleFunc("DELETE /api/cart/{productId}", login(h.RemoveFromCart))
+	mux.HandleFunc("POST /api/orders", login(h.CreateOrder))
+	mux.HandleFunc("GET /api/orders", login(h.MyOrders))
+	mux.HandleFunc("GET /api/orders/{id}", login(h.MyOrder))
+	mux.HandleFunc("PUT /api/orders/{id}/cancel", login(h.CancelMyOrder))
 
 	// ---------- Admin: ทุกเส้นใต้ /api/admin ผ่าน admin(...) ไม่มีข้อยกเว้น ----------
+	mux.HandleFunc("GET /api/admin/stats", admin(h.AdminStats))
 	mux.HandleFunc("GET /api/admin/products", admin(h.AdminListProducts))
 	mux.HandleFunc("GET /api/admin/products/{id}", admin(h.AdminGetProduct))
 	mux.HandleFunc("POST /api/admin/products", admin(h.AdminCreateProduct))
 	mux.HandleFunc("PUT /api/admin/products/{id}", admin(h.AdminUpdateProduct))
 	mux.HandleFunc("DELETE /api/admin/products/{id}", admin(h.AdminDeleteProduct))
-	// TODO รอบถัดไป: /api/admin/stats, /api/admin/orders, /api/admin/members
+	mux.HandleFunc("GET /api/admin/orders", admin(h.AdminListOrders))
+	mux.HandleFunc("GET /api/admin/orders/{id}", admin(h.AdminGetOrder))
+	mux.HandleFunc("PUT /api/admin/orders/{id}/status", admin(h.AdminSetOrderStatus))
+	mux.HandleFunc("GET /api/admin/members", admin(h.AdminMembers))
+	mux.HandleFunc("PUT /api/admin/members/{id}/role", admin(h.AdminSetRole))
 
 	return mux
 }

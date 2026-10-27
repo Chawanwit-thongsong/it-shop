@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import * as api from '../api/backend';
 import { useAuth } from '../auth/AuthContext';
@@ -8,18 +8,29 @@ import { baht } from '../utils/format';
 
 function ProductDetail() {
   const { id } = useParams();
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, token } = useAuth();
   const navigate = useNavigate();
   const { data: p, loading, error, reload } = useApi(useCallback(() => api.getProduct(id), [id]));
+  const [qty, setQty] = useState(1);
+  const [msg, setMsg] = useState(null);
+  const [busy, setBusy] = useState(false);
 
-  function handleAddToCart() {
+  async function handleAddToCart() {
     // Guest กดแล้วพาไป login ก่อน แล้วเด้งกลับมาหน้านี้
     if (!isLoggedIn) {
       navigate('/login', { state: { from: `/products/${id}` } });
       return;
     }
-    // TODO รอบถัดไป: เรียก api.addToCart(p.id, 1, token)
-    alert('ระบบตะกร้าจะทำในรอบถัดไป');
+    setBusy(true);
+    setMsg(null);
+    try {
+      await api.addToCart(p.id, qty, token);
+      setMsg({ ok: true, text: `ใส่ตะกร้าแล้ว ${qty} ชิ้น` });
+    } catch (err) {
+      setMsg({ ok: false, text: err.message }); // เช่น จำนวนเกินสต็อกที่มี
+    } finally {
+      setBusy(false);
+    }
   }
 
   if (loading) return <Loading />;
@@ -53,9 +64,24 @@ function ProductDetail() {
           <p className={`mt-2 text-sm ${soldOut ? 'text-red-500' : 'text-emerald-600'}`}>
             {soldOut ? 'สินค้าหมด' : `มีสินค้า ${p.stock} ชิ้น`}
           </p>
-          <button onClick={handleAddToCart} disabled={soldOut} className={`${btnPrimary} mt-6 px-6 py-3`}>
-            {isLoggedIn ? 'ใส่ตะกร้า' : 'เข้าสู่ระบบเพื่อสั่งซื้อ'}
-          </button>
+          <div className="mt-6 flex items-center gap-3">
+            {isLoggedIn && !soldOut && (
+              <select aria-label="จำนวน" value={qty} onChange={(e) => setQty(Number(e.target.value))}
+                      className="rounded-lg border border-slate-300 px-3 py-3">
+                {Array.from({ length: Math.min(p.stock, 10) }, (_, i) => i + 1).map((n) => (
+                  <option key={n} value={n}>{n}</option>
+                ))}
+              </select>
+            )}
+            <button onClick={handleAddToCart} disabled={soldOut || busy} className={`${btnPrimary} px-6 py-3`}>
+              {isLoggedIn ? (busy ? 'กำลังเพิ่ม...' : 'ใส่ตะกร้า') : 'เข้าสู่ระบบเพื่อสั่งซื้อ'}
+            </button>
+          </div>
+          {msg && (
+            <p role="status" className={`mt-3 text-sm ${msg.ok ? 'text-emerald-600' : 'text-red-600'}`}>
+              {msg.text} {msg.ok && <Link to="/cart" className="underline">ไปที่ตะกร้า</Link>}
+            </p>
+          )}
           {p.description && <p className="mt-8 whitespace-pre-line leading-relaxed text-slate-600">{p.description}</p>}
         </div>
       </div>

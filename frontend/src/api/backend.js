@@ -24,6 +24,10 @@ export async function apiFetch(path, { method = 'GET', body, token } = {}) {
 
   const data = await res.json().catch(() => ({}));
   if (!res.ok) {                                             // 4) 400/401/403/404/409 มาลงตรงนี้
+    if (res.status === 401 && token) {
+      // token หมดอายุหรือไม่ถูกต้อง: บอก AuthContext ให้ logout แล้ว ProtectedRoute จะพาไปหน้า login
+      window.dispatchEvent(new Event('auth:expired'));
+    }
     const err = new Error(data.error?.message ?? `เซิร์ฟเวอร์ตอบกลับ ${res.status}`);
     err.status = res.status;
     err.code = data.error?.code;
@@ -63,7 +67,55 @@ export function getProduct(id) {
   return apiFetch(`/api/products/${id}`);
 }
 
+// ---------- ตะกร้า (Member) ทุกตัวตอบตะกร้าล่าสุด { items, total } ----------
+export function getCart(token) {
+  return apiFetch('/api/cart', { token });
+}
+export function addToCart(productId, qty, token) {
+  return apiFetch('/api/cart', { method: 'POST', body: { productId, qty }, token });
+}
+export function setCartQty(productId, qty, token) {
+  return apiFetch(`/api/cart/${productId}`, { method: 'PUT', body: { qty }, token });
+}
+export function removeFromCart(productId, token) {
+  return apiFetch(`/api/cart/${productId}`, { method: 'DELETE', token });
+}
+
+// ---------- ออเดอร์ (Member) ----------
+export function checkout(ship, token) {
+  return apiFetch('/api/orders', { method: 'POST', body: ship, token }); // ship = { shipName, shipPhone, shipAddress }
+}
+export async function getMyOrders(token) {
+  const data = await apiFetch('/api/orders', { token });
+  return data.items;
+}
+export function getMyOrder(id, token) {
+  return apiFetch(`/api/orders/${id}`, { token });
+}
+export function cancelMyOrder(id, token) {
+  return apiFetch(`/api/orders/${id}/cancel`, { method: 'PUT', token });
+}
+
 // ---------- หลังบ้าน (ต้องแนบ token ของ admin ถ้าเป็น member Go ตอบ 403) ----------
+export function getAdminStats(token) {
+  return apiFetch('/api/admin/stats', { token });
+}
+export function getAdminOrders(status, token) {
+  return apiFetch(`/api/admin/orders${status ? `?status=${status}` : ''}`, { token }); // { items, transitions }
+}
+export function getAdminOrder(id, token) {
+  return apiFetch(`/api/admin/orders/${id}`, { token });
+}
+export function setOrderStatus(id, status, token) {
+  return apiFetch(`/api/admin/orders/${id}/status`, { method: 'PUT', body: { status }, token });
+}
+export async function getAdminMembers(token) {
+  const data = await apiFetch('/api/admin/members', { token });
+  return data.items;
+}
+export function setMemberRole(id, role, token) {
+  return apiFetch(`/api/admin/members/${id}/role`, { method: 'PUT', body: { role }, token });
+}
 export function getAdminProducts(params, token) {
   const qs = new URLSearchParams(Object.entries(params).filter(([, v]) => v !== '' && v != null));
   return apiFetch(`/api/admin/products?${qs}`, { token });

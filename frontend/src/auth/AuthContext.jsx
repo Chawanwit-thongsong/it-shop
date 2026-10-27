@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import * as api from '../api/backend';
 
 // เก็บสถานะ login ไว้กลางแอป Navbar, Cart, หน้า Admin ต้องรู้เหมือนกันหมดว่าใคร login อยู่
@@ -35,6 +35,13 @@ export function AuthProvider({ children }) {
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(MEMBER_KEY);
   }
+
+  // backend.js ส่งสัญญาณมาเมื่อ server ตอบ 401 (token หมดอายุ) -> logout อัตโนมัติ
+  useEffect(() => {
+    window.addEventListener('auth:expired', logout);
+    return () => window.removeEventListener('auth:expired', logout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- logout ใช้แค่ setState/localStorage ผูกครั้งเดียวพอ
+  }, []);
 
   // isAdmin ใช้แค่โชว์/ซ่อนเมนู การป้องกันจริงอยู่ที่ Go (แก้ localStorage ก็ยิง /api/admin ไม่ผ่าน)
   const isAdmin = member?.role === 'admin';

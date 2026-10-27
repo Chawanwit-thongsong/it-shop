@@ -108,9 +108,18 @@ UPDATE members SET role = 'admin' WHERE email = 'อีเมลที่สม�
 | Guest | GET | /api/products/{id} | |
 | Member | GET / PUT | /api/me | ดู/แก้ชื่อ เบอร์ ที่อยู่ |
 | Member | PUT | /api/me/password | `{currentPassword, newPassword}` |
+| Member | GET / POST | /api/cart | ดูตะกร้า / เพิ่ม `{productId, qty}` (ทุกเส้นตอบตะกร้าล่าสุด) |
+| Member | PUT / DELETE | /api/cart/{productId} | แก้จำนวน `{qty}` / ลบ |
+| Member | POST | /api/orders | checkout `{shipName, shipPhone, shipAddress}` (transaction: เช็กสต็อก → สร้างออเดอร์ → ตัดสต็อก → ล้างตะกร้า) |
+| Member | GET | /api/orders · /api/orders/{id} | ของตัวเองเท่านั้น (ของคนอื่นได้ 404) |
+| Member | PUT | /api/orders/{id}/cancel | เฉพาะ pending แล้วคืนสต็อก |
+| Admin | GET | /api/admin/stats | ยอดขาย, จำนวนออเดอร์ตามสถานะ, สินค้าใกล้หมด, ออเดอร์ล่าสุด |
 | Admin | GET / POST | /api/admin/products | เห็นสินค้าที่ปิดขายด้วย |
 | Admin | GET / PUT / DELETE | /api/admin/products/{id} | DELETE = ปิดขาย (soft delete) |
-| _รอบถัดไป_ | | /api/cart, /api/orders, /api/admin/orders, /api/admin/members, /api/admin/stats | |
+| Admin | GET | /api/admin/orders?status= · /api/admin/orders/{id} | |
+| Admin | PUT | /api/admin/orders/{id}/status | `{status}` เปลี่ยนได้ตามลำดับ pending → paid → shipped → done (ยกเลิกได้ตอน pending/paid) |
+| Admin | GET | /api/admin/members | |
+| Admin | PUT | /api/admin/members/{id}/role | `{role}` เปลี่ยนของตัวเองไม่ได้ |
 
 Error ทุกเส้นใช้รูปแบบเดียวกัน: `{"error": {"code": "...", "message": "..."}}` · ไม่มี token = 401, role ไม่พอ = 403
 

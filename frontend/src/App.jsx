@@ -3,17 +3,23 @@ import { AuthProvider } from './auth/AuthContext';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 import RequireRole from './components/RequireRole';
-import ComingSoon from './components/ComingSoon';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
+import Cart from './pages/Cart';
+import MyOrders from './pages/MyOrders';
+import OrderDetail from './pages/OrderDetail';
 import NotFound from './pages/NotFound';
 import AdminLayout from './pages/admin/AdminLayout';
+import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminProducts from './pages/admin/AdminProducts';
 import AdminProductForm from './pages/admin/AdminProductForm';
+import AdminOrders from './pages/admin/AdminOrders';
+import AdminOrderDetail from './pages/admin/AdminOrderDetail';
+import AdminMembers from './pages/admin/AdminMembers';
 
 function App() {
   return (
@@ -31,17 +37,19 @@ function App() {
 
             {/* Member: ต้อง login */}
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-            <Route path="/cart" element={<ProtectedRoute><ComingSoon title="ตะกร้าสินค้า" /></ProtectedRoute>} />
-            <Route path="/orders" element={<ProtectedRoute><ComingSoon title="ออเดอร์ของฉัน" /></ProtectedRoute>} />
+            <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+            <Route path="/orders" element={<ProtectedRoute><MyOrders /></ProtectedRoute>} />
+            <Route path="/orders/:id" element={<ProtectedRoute><OrderDetail /></ProtectedRoute>} />
 
             {/* Admin: ครอบทั้งกิ่งด้วย RequireRole ครั้งเดียว หน้าลูกทุกหน้าได้รับการป้องกัน */}
             <Route path="/admin" element={<RequireRole role="admin"><AdminLayout /></RequireRole>}>
-              <Route index element={<ComingSoon title="Dashboard" />} />
+              <Route index element={<AdminDashboard />} />
               <Route path="products" element={<AdminProducts />} />
               <Route path="products/new" element={<AdminProductForm />} />
               <Route path="products/:id" element={<AdminProductForm />} />
-              <Route path="orders" element={<ComingSoon title="จัดการออเดอร์" />} />
-              <Route path="members" element={<ComingSoon title="จัดการสมาชิก" />} />
+              <Route path="orders" element={<AdminOrders />} />
+              <Route path="orders/:id" element={<AdminOrderDetail />} />
+              <Route path="members" element={<AdminMembers />} />
             </Route>
 
             <Route path="*" element={<NotFound />} />

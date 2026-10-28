@@ -44,7 +44,7 @@ function Cart() {
         </div>
       ) : (
         <div className="mt-6 grid gap-6 md:grid-cols-[1fr_320px]">
-          <ul className="divide-y divide-line rounded-plate border border-line bg-white">
+          <ul className="divide-y divide-line rounded-plate border border-line bg-surface">
             {items.map((it) => (
               <li key={it.productId} className="flex flex-wrap items-center gap-4 p-4 sm:flex-nowrap">
                 <div className="h-20 w-20 shrink-0 rounded-lg bg-plate">
@@ -60,7 +60,7 @@ function Cart() {
                 <label className="sr-only" htmlFor={`qty-${it.productId}`}>จำนวน {it.name}</label>
                 <select id={`qty-${it.productId}`} value={it.qty} disabled={busyId === it.productId}
                         onChange={(e) => run(it.productId, () => api.setCartQty(it.productId, Number(e.target.value), token))}
-                        className="rounded-lg border border-line bg-white px-2 py-1.5">
+                        className="rounded-lg border border-line bg-surface px-2 py-1.5">
                   {Array.from({ length: Math.max(it.qty, Math.min(it.stock, 10)) }, (_, i) => i + 1).map((n) => (
                     <option key={n} value={n}>{n}</option>
                   ))}

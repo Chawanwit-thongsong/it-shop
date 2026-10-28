@@ -9,7 +9,7 @@ import { ORDER_STATUS, baht } from '../../utils/format';
 
 function Card({ label, value, to, dark = false }) {
   const body = (
-    <div className={`h-full rounded-plate p-5 ${dark ? 'bg-ink text-white' : 'border border-line bg-white'}`}>
+    <div className={`h-full rounded-plate p-5 ${dark ? 'bg-night text-white ring-1 ring-white/10' : 'border border-line bg-surface'}`}>
       <p className={`text-sm ${dark ? 'text-white/60' : 'text-muted'}`}>{label}</p>
       <p className={`mt-2 text-3xl font-semibold tracking-tight ${dark ? 'text-accent' : 'text-ink'}`}>{value}</p>
     </div>
@@ -38,7 +38,7 @@ function AdminDashboard() {
       <div className="flex flex-wrap gap-2">
         {Object.entries(ORDER_STATUS).map(([key, { label }]) => (
           <Link key={key} to={`/admin/orders?status=${key}`}
-                className="inline-flex items-center gap-2 rounded-full border border-line bg-white py-1 pl-3 pr-1 text-sm transition-colors hover:border-ink/30">
+                className="inline-flex items-center gap-2 rounded-full border border-line bg-surface py-1 pl-3 pr-1 text-sm transition-colors hover:border-ink/30">
             {label}
             <span className="min-w-[1.75rem] rounded-full bg-plate px-2 py-0.5 text-center text-xs font-semibold">{s.ordersByStatus[key] ?? 0}</span>
           </Link>
@@ -51,7 +51,7 @@ function AdminDashboard() {
           {s.recentOrders.length === 0 ? (
             <Empty title="ยังไม่มีออเดอร์" />
           ) : (
-            <ul className="divide-y divide-line rounded-plate border border-line bg-white text-sm">
+            <ul className="divide-y divide-line rounded-plate border border-line bg-surface text-sm">
               {s.recentOrders.map((o) => (
                 <li key={o.id}>
                   <Link to={`/admin/orders/${o.id}`} className="flex items-center gap-3 p-3 hover:bg-plate">
@@ -70,7 +70,7 @@ function AdminDashboard() {
           {s.lowStock.length === 0 ? (
             <Empty title="สต็อกยังพอทุกชิ้น" />
           ) : (
-            <ul className="divide-y divide-line rounded-plate border border-line bg-white text-sm">
+            <ul className="divide-y divide-line rounded-plate border border-line bg-surface text-sm">
               {s.lowStock.map((p) => (
                 <li key={p.id}>
                   <Link to={`/admin/products/${p.id}`} className="flex justify-between p-3 hover:bg-plate">

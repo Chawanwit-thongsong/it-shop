@@ -11,14 +11,14 @@ function OrderView({ order, showMember = false }) {
         <span className="text-sm text-muted">{dateTime(order.createdAt)}</span>
       </div>
 
-      <div className="rounded-plate border border-line bg-white p-5 text-sm">
+      <div className="rounded-plate border border-line bg-surface p-5 text-sm">
         <h2 className="mb-2 font-semibold">จัดส่งถึง</h2>
         {showMember && <p className="text-muted">สมาชิก: {order.memberName} ({order.memberEmail})</p>}
         <p>{order.shipName}, โทร {order.shipPhone}</p>
         <p className="whitespace-pre-line text-muted">{order.shipAddress}</p>
       </div>
 
-      <ul className="divide-y divide-line rounded-plate border border-line bg-white">
+      <ul className="divide-y divide-line rounded-plate border border-line bg-surface">
         {order.items.map((it) => (
           <li key={it.productId} className="flex items-center gap-4 p-4">
             {it.imageUrl && <img src={it.imageUrl} alt="" className="h-12 w-12 rounded object-contain" />}

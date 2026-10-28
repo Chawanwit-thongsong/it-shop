@@ -58,7 +58,7 @@ function AdminProducts() {
           <Empty title="ไม่พบสินค้า" />
         ) : (
           <>
-            <div className="overflow-x-auto rounded-plate border border-line bg-white">
+            <div className="overflow-x-auto rounded-plate border border-line bg-surface">
               <table className="w-full text-left text-sm">
                 <thead className="bg-plate text-xs font-medium text-muted">
                   <tr>

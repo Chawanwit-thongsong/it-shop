@@ -57,9 +57,9 @@ function Home() {
               </Link>
             ))}
             <Link to="/products"
-                  className="col-span-2 flex items-center justify-between rounded-plate bg-accent px-5 py-6 text-ink transition-colors hover:bg-accent-hover md:col-span-3">
+                  className="col-span-2 flex items-center justify-between rounded-plate bg-accent px-5 py-6 text-night transition-colors hover:bg-accent-hover md:col-span-3">
               <span className="text-lg font-semibold">ดูสินค้าทั้งหมด</span>
-              <span className="text-sm font-medium text-ink/70">{all.data.total} รายการ</span>
+              <span className="text-sm font-medium text-night/70">{all.data.total} รายการ</span>
             </Link>
           </div>
         )}

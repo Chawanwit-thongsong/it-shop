@@ -28,7 +28,7 @@ function MyOrders() {
             {orders.data.map((o) => (
               <li key={o.id}>
                 <Link to={`/orders/${o.id}`}
-                      className="flex flex-wrap items-center gap-x-6 gap-y-2 rounded-plate border border-line bg-white p-5 transition-colors hover:border-ink/30">
+                      className="flex flex-wrap items-center gap-x-6 gap-y-2 rounded-plate border border-line bg-surface p-5 transition-colors hover:border-ink/30">
                   <span className="text-lg font-semibold">#{o.id}</span>
                   <span className="text-sm text-muted">{dateTime(o.createdAt)}</span>
                   <span className="text-sm text-muted">{o.itemCount} ชิ้น</span>

@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from 'react-router-dom';
 
 const link = ({ isActive }) =>
-  `block rounded-lg px-3 py-2 text-sm transition-colors ${isActive ? 'bg-ink font-medium text-white' : 'text-muted hover:bg-plate hover:text-ink'}`;
+  `block rounded-lg px-3 py-2 text-sm transition-colors ${isActive ? 'bg-ink font-medium text-surface' : 'text-muted hover:bg-plate hover:text-ink'}`;
 
 // โครงหน้าหลังบ้าน: เมนูซ้าย + เนื้อหาหน้าลูก (Outlet)
 function AdminLayout() {

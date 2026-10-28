@@ -73,7 +73,7 @@ function ProductDetail() {
           <div className="mt-8 flex items-stretch gap-3 border-t border-line pt-6">
             {isLoggedIn && !soldOut && (
               <select aria-label="จำนวน" value={qty} onChange={(e) => setQty(Number(e.target.value))}
-                      className="rounded-[10px] border border-line bg-white px-3">
+                      className="rounded-[10px] border border-line bg-surface px-3">
                 {Array.from({ length: Math.min(p.stock, 10) }, (_, i) => i + 1).map((n) => (
                   <option key={n} value={n}>{n}</option>
                 ))}

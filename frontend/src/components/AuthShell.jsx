@@ -4,8 +4,8 @@ import { patternBg } from '../utils/patternBg';
 function AuthShell({ title, children, footer }) {
   return (
     <div className="mx-auto grid max-w-5xl gap-0 px-4 py-12 md:grid-cols-2 md:py-16">
-      <aside className="hidden flex-col justify-between rounded-l-plate bg-ink p-10 text-white md:flex" style={patternBg(0.6, 0.92)}>
-        <span className="grid h-10 w-10 place-items-center rounded-lg bg-accent text-sm font-bold text-ink">IT</span>
+      <aside className="hidden flex-col justify-between rounded-l-plate bg-night p-10 text-white md:flex" style={patternBg(0.6, 0.92)}>
+        <span className="grid h-10 w-10 place-items-center rounded-lg bg-accent text-sm font-bold text-night">IT</span>
         <div>
           <p className="text-2xl font-semibold leading-snug">
             สั่งซื้อและติดตามออเดอร์ <span className="whitespace-nowrap">ได้ในที่เดียว</span>
@@ -17,7 +17,7 @@ function AuthShell({ title, children, footer }) {
           </ul>
         </div>
       </aside>
-      <section className="rounded-plate border border-line bg-white p-8 md:rounded-l-none md:p-10">
+      <section className="rounded-plate border border-line bg-surface p-8 md:rounded-l-none md:p-10">
         <h1 className="text-3xl font-semibold tracking-tight">{title}</h1>
         {children}
         <p className="mt-8 text-sm text-muted">{footer}</p>

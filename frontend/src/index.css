@@ -2,10 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-white text-ink antialiased;
-  font-feature-settings: 'tnum' 1; /* ตัวเลขกว้างเท่ากัน ราคาเรียงตรงกัน */
+/* ---------- สีของธีม (ค่า R G B) ---------- */
+:root {
+  --ink: 20 20 20;          /* ตัวหนังสือหลัก */
+  --muted: 102 100 97;      /* ตัวหนังสือรอง */
+  --line: 230 228 225;      /* เส้นขอบ */
+  --plate: 244 243 241;     /* พื้นรองรูปสินค้า/กล่องเทา */
+  --surface: 255 255 255;   /* การ์ด ฟอร์ม ตาราง */
+  --page: 252 251 250;      /* พื้นหลังหน้าเว็บ (เกือบขาว) */
+  --accent-text: 184 74 11; /* ลิงก์สีส้มบนพื้นสว่าง */
+  --accent-soft: 255 240 230;
+  --glow: 0.26;             /* ความเข้มของวงแสงส้ม */
+  color-scheme: light;
 }
+
+.dark {
+  --ink: 240 238 235;
+  --muted: 168 164 158;
+  --line: 52 50 48;
+  --plate: 36 34 33;
+  --surface: 27 26 25;
+  --page: 17 16 16;
+  --accent-text: 255 145 82;
+  --accent-soft: 70 37 17;
+  --glow: 0.2;
+  color-scheme: dark;       /* ให้ dropdown / scrollbar ของเบราว์เซอร์เป็นโหมดมืดด้วย */
+}
+
+body {
+  @apply text-ink antialiased;
+  font-feature-settings: 'tnum' 1; /* ตัวเลขกว้างเท่ากัน ราคาเรียงตรงกัน */
+  background-color: rgb(var(--page));
+  /* Orange glow: วงแสงส้มเบลอตามมุมจอ ติดอยู่กับที่เวลาเลื่อน */
+  background-image:
+    radial-gradient(36rem 30rem at -4% 14%, rgb(255 106 19 / var(--glow)), transparent 70%),
+    radial-gradient(30rem 26rem at 104% 22%, rgb(255 150 70 / calc(var(--glow) * 0.8)), transparent 70%),
+    radial-gradient(40rem 34rem at 104% 104%, rgb(255 106 19 / calc(var(--glow) * 0.75)), transparent 70%),
+    radial-gradient(28rem 24rem at -4% 96%, rgb(255 175 110 / calc(var(--glow) * 0.7)), transparent 70%);
+  background-attachment: fixed;
+}
+
+/* ---------- dark mode: ปรับสีที่มาจาก palette ปกติของ Tailwind ให้อ่านชัด ---------- */
+.dark .bg-red-50,
+.dark .bg-red-50\/60,
+.dark .hover\:bg-red-50:hover { background-color: rgb(127 29 29 / 0.28); }
+.dark .border-red-200 { border-color: rgb(153 27 27 / 0.6); }
+.dark .text-red-700,
+.dark .text-red-800 { color: rgb(252 165 165); }
+.dark .bg-emerald-50 { background-color: rgb(6 78 59 / 0.4); }
+.dark .text-emerald-700 { color: rgb(110 231 183); }
+.dark .bg-amber-50 { background-color: rgb(120 53 15 / 0.4); }
+.dark .text-amber-700,
+.dark .text-amber-800 { color: rgb(252 211 77); }
+.dark .bg-sky-50 { background-color: rgb(12 74 110 / 0.45); }
+.dark .text-sky-800 { color: rgb(125 211 252); }
+/* รูปสินค้าใช้ multiply บนพื้นเทาตอนโหมดสว่าง โหมดมืดต้องปิดไม่งั้นรูปมืดจนมองไม่เห็น */
+.dark .mix-blend-multiply { mix-blend-mode: normal; }
 
 /* วงโฟกัสชัดเจนเวลาใช้คีย์บอร์ด */
 :focus-visible {

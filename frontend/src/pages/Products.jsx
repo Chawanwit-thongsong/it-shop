@@ -37,7 +37,7 @@ function Products() {
 
   const currentCat = cats.data?.find((c) => c.slug === category);
   const sideLink = (active) =>
-    `block w-full rounded-lg px-3 py-2 text-left text-sm transition-colors ${active ? 'bg-ink font-medium text-white' : 'text-muted hover:bg-plate hover:text-ink'}`;
+    `block w-full rounded-lg px-3 py-2 text-left text-sm transition-colors ${active ? 'bg-ink font-medium text-surface' : 'text-muted hover:bg-plate hover:text-ink'}`;
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">

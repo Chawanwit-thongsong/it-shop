@@ -15,7 +15,7 @@ function ProductCard({ product }) {
           <div className="grid h-full place-items-center text-sm text-muted">ไม่มีรูป</div>
         )}
         {soldOut && (
-          <span className="absolute left-3 top-3 rounded-md bg-ink px-2 py-1 text-xs font-medium text-white">สินค้าหมด</span>
+          <span className="absolute left-3 top-3 rounded-md bg-ink px-2 py-1 text-xs font-medium text-surface">สินค้าหมด</span>
         )}
       </div>
       <div className="px-1 pt-3">

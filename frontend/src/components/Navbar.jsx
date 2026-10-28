@@ -3,12 +3,36 @@ import { Link, NavLink, useLocation, useNavigate, useSearchParams } from 'react-
 import * as api from '../api/backend';
 import { useAuth } from '../auth/AuthContext';
 import { useApi } from '../hooks/useApi';
+import { useTheme } from '../hooks/useTheme';
 import { patternBg } from '../utils/patternBg';
 
 const iconProps = {
   width: 20, height: 20, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor',
   strokeWidth: 1.75, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true,
 };
+
+function SunIcon() {
+  return (
+    <svg {...iconProps}>
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+    </svg>
+  );
+}
+function MoonIcon() {
+  return <svg {...iconProps}><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" /></svg>;
+}
+
+// ปุ่มสลับโหมดสว่าง/มืด
+function ThemeToggle() {
+  const { dark, toggle } = useTheme();
+  return (
+    <button onClick={toggle} aria-label={dark ? 'เปลี่ยนเป็นโหมดสว่าง' : 'เปลี่ยนเป็นโหมดมืด'} title={dark ? 'โหมดสว่าง' : 'โหมดมืด'}
+            className="grid h-10 w-10 place-items-center rounded-full bg-coal text-white transition-colors hover:bg-white/15">
+      {dark ? <SunIcon /> : <MoonIcon />}
+    </button>
+  );
+}
 
 function SearchIcon() {
   return <svg {...iconProps}><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>;
@@ -67,10 +91,10 @@ function Navbar() {
   const navText = 'rounded-full px-3 py-2 text-white/70 transition-colors hover:text-white';
 
   return (
-    <header className="sticky top-0 z-40 bg-ink text-white" style={patternBg(0.86)}>
+    <header className="sticky top-0 z-40 bg-night text-white" style={patternBg(0.86)}>
       <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3 md:gap-8">
         <Link to="/" className="flex shrink-0 items-center gap-2" aria-label="IT Shop หน้าแรก">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-accent text-[13px] font-bold text-ink">IT</span>
+          <span className="grid h-8 w-8 place-items-center rounded-lg bg-accent text-[13px] font-bold text-night">IT</span>
           <span className="hidden text-lg font-semibold tracking-tight sm:inline">IT Shop</span>
         </Link>
 
@@ -89,16 +113,17 @@ function Navbar() {
               </NavLink>
               <button onClick={handleLogout} className={navText}>ออกจากระบบ</button>
               <NavLink to="/cart" aria-label="ตะกร้า"
-                       className={({ isActive }) => `ml-1 grid h-10 w-10 place-items-center rounded-full transition-colors ${isActive ? 'bg-accent text-ink' : 'bg-coal text-white hover:bg-white/15'}`}>
+                       className={({ isActive }) => `ml-1 grid h-10 w-10 place-items-center rounded-full transition-colors ${isActive ? 'bg-accent text-night' : 'bg-coal text-white hover:bg-white/15'}`}>
                 <CartIcon />
               </NavLink>
             </>
           ) : (
             <>
               <NavLink to="/login" className={navText}>เข้าสู่ระบบ</NavLink>
-              <Link to="/register" className="rounded-full bg-accent px-4 py-2 font-semibold text-ink transition-colors hover:bg-accent-hover">สมัครสมาชิก</Link>
+              <Link to="/register" className="rounded-full bg-accent px-4 py-2 font-semibold text-night transition-colors hover:bg-accent-hover">สมัครสมาชิก</Link>
             </>
           )}
+          <span className="ml-1"><ThemeToggle /></span>
         </nav>
       </div>
 

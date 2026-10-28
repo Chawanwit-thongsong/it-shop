@@ -36,8 +36,8 @@ export function ErrorBox({ error, onRetry }) {
 export function ConfirmBox({ open, title, children, confirmText = 'ยืนยัน', busy, onConfirm, onCancel }) {
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-ink/40 px-4" role="dialog" aria-modal="true">
-      <div className="w-full max-w-md rounded-plate bg-white p-6 shadow-2xl">
+    <div className="fixed inset-0 z-50 grid place-items-center bg-night/40 px-4" role="dialog" aria-modal="true">
+      <div className="w-full max-w-md rounded-plate bg-surface p-6 shadow-2xl">
         <h2 className="text-lg font-semibold text-ink">{title}</h2>
         <div className="mt-2 text-sm leading-relaxed text-muted">{children}</div>
         <div className="mt-6 flex justify-end gap-2">
@@ -52,12 +52,12 @@ export function ConfirmBox({ open, title, children, confirmText = 'ยืนย�
 }
 
 export const btnPrimary =
-  'inline-flex items-center justify-center rounded-[10px] bg-accent px-4 py-2 text-sm font-semibold text-ink transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:bg-line disabled:text-muted';
+  'inline-flex items-center justify-center rounded-[10px] bg-accent px-4 py-2 text-sm font-semibold text-night transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:bg-line disabled:text-muted';
 export const btnGhost =
-  'inline-flex items-center justify-center rounded-[10px] border border-line bg-white px-4 py-2 text-sm font-medium text-ink transition-colors hover:border-ink/30 disabled:cursor-not-allowed disabled:text-muted';
+  'inline-flex items-center justify-center rounded-[10px] border border-line bg-surface px-4 py-2 text-sm font-medium text-ink transition-colors hover:border-ink/30 disabled:cursor-not-allowed disabled:text-muted';
 export const btnDanger =
-  'inline-flex items-center justify-center rounded-[10px] border border-line bg-white px-4 py-2 text-sm font-medium text-red-700 transition-colors hover:border-red-300 hover:bg-red-50 disabled:text-muted';
+  'inline-flex items-center justify-center rounded-[10px] border border-line bg-surface px-4 py-2 text-sm font-medium text-red-700 transition-colors hover:border-red-300 hover:bg-red-50 disabled:text-muted';
 const btnDangerSolid =
   'inline-flex items-center justify-center rounded-[10px] bg-red-700 px-4 py-2 text-sm font-medium text-white hover:bg-red-800 disabled:bg-line';
 export const inputClass =
-  'w-full rounded-[10px] border border-line bg-white px-3 py-2.5 text-ink placeholder:text-muted/70 transition-colors focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent-soft';
+  'w-full rounded-[10px] border border-line bg-surface px-3 py-2.5 text-ink placeholder:text-muted/70 transition-colors focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent-soft';

@@ -64,7 +64,7 @@ function AdminProductForm() {
   return (
     <div className="max-w-2xl">
       <h1 className="text-3xl font-semibold tracking-tight">{isEdit ? 'แก้ไขสินค้า' : 'เพิ่มสินค้า'}</h1>
-      <form onSubmit={handleSubmit} noValidate className="mt-6 grid gap-4 rounded-plate border border-line bg-white p-6 md:grid-cols-2">
+      <form onSubmit={handleSubmit} noValidate className="mt-6 grid gap-4 rounded-plate border border-line bg-surface p-6 md:grid-cols-2">
         <label className="block md:col-span-2">
           <span className="text-sm text-muted">ชื่อสินค้า *</span>
           <input value={form.name} onChange={set('name')} className={`${inputClass} mt-1`} />

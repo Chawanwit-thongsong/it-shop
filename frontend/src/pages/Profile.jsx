@@ -49,7 +49,7 @@ function ProfileForm({ member, token, onSaved }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 rounded-plate border border-line bg-white p-6">
+    <form onSubmit={handleSubmit} className="space-y-4 rounded-plate border border-line bg-surface p-6">
       <h2 className="font-semibold">ข้อมูลส่วนตัว</h2>
       <p className="text-sm text-muted">อีเมล: {member.email}</p>
       <label className="block">
@@ -95,7 +95,7 @@ function PasswordForm({ token }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 rounded-plate border border-line bg-white p-6">
+    <form onSubmit={handleSubmit} className="space-y-4 rounded-plate border border-line bg-surface p-6">
       <h2 className="font-semibold">เปลี่ยนรหัสผ่าน</h2>
       <label className="block">
         <span className="text-sm text-muted">รหัสผ่านเดิม</span>

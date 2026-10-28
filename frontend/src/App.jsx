@@ -20,6 +20,7 @@ import AdminProductForm from './pages/admin/AdminProductForm';
 import AdminOrders from './pages/admin/AdminOrders';
 import AdminOrderDetail from './pages/admin/AdminOrderDetail';
 import AdminMembers from './pages/admin/AdminMembers';
+import { patternBg } from './utils/patternBg';
 
 function App() {
   return (
@@ -55,7 +56,7 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
-        <footer className="mt-auto bg-ink text-white/60">
+        <footer className="mt-auto bg-ink text-white/70" style={patternBg(0.84)}>
           <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-8 text-sm md:flex-row md:justify-between">
             <p><span className="font-semibold text-white">IT Shop</span> โปรเจกต์วิชา Client-Server Web</p>
             <p>ข้อมูลสินค้าตัวอย่างจาก DummyJSON</p>

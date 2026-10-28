@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation, useNavigate, useSearchParams } from 'react-
 import * as api from '../api/backend';
 import { useAuth } from '../auth/AuthContext';
 import { useApi } from '../hooks/useApi';
+import { patternBg } from '../utils/patternBg';
 
 const iconProps = {
   width: 20, height: 20, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor',
@@ -66,7 +67,7 @@ function Navbar() {
   const navText = 'rounded-full px-3 py-2 text-white/70 transition-colors hover:text-white';
 
   return (
-    <header className="sticky top-0 z-40 bg-ink text-white">
+    <header className="sticky top-0 z-40 bg-ink text-white" style={patternBg(0.86)}>
       <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3 md:gap-8">
         <Link to="/" className="flex shrink-0 items-center gap-2" aria-label="IT Shop หน้าแรก">
           <span className="grid h-8 w-8 place-items-center rounded-lg bg-accent text-[13px] font-bold text-ink">IT</span>

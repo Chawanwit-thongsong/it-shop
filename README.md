@@ -8,8 +8,8 @@ Term Project วิชา Client-Server Web Development
 
 | | URL |
 |---|---|
-| หน้าเว็บ | _ใส่ URL Vercel_ |
-| API | _ใส่ URL Render_ |
+| หน้าเว็บ | https://it-shop-n11x.onrender.com |
+| API | https://it-shop-zeta.vercel.app/ |
 
 แผนงานทั้งหมดและ checklist ตามเกณฑ์อยู่ใน [PLAN.md](PLAN.md)
 

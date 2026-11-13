@@ -11,8 +11,6 @@ Term Project วิชา Client-Server Web Development
 | หน้าเว็บ | https://it-shop-n11x.onrender.com |
 | API | https://it-shop-zeta.vercel.app/ |
 
-แผนงานทั้งหมดและ checklist ตามเกณฑ์อยู่ใน [PLAN.md](PLAN.md)
-
 ---
 
 ## โครงโปรเจกต์
